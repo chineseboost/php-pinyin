@@ -13,11 +13,11 @@ class PinyinTone
     const FOURTH = 4;
 
     const TONE_INDICATORS = [
-        PinyinTone::ZERO_FIFTH => ['5', '0', '·'],
-        PinyinTone::FIRST      => ['1', 'ā', 'ē', 'ī', 'ō', 'ū', 'ǖ', 'v̄', 'ˉ'],
-        PinyinTone::SECOND     => ['2', 'á', 'é', 'í', 'ó', 'ú', 'ǘ', 'v́', '´'],
-        PinyinTone::THIRD      => ['3', 'ǎ', 'ě', 'ǐ', 'ǒ', 'ǔ', 'ǚ', 'v̌', 'ˇ'],
-        PinyinTone::FOURTH     => ['4', 'à', 'è', 'ì', 'ò', 'ù', 'ǜ', 'v̀', '`'],
+        self::ZERO_FIFTH => ['5', '0', '·'],
+        self::FIRST      => ['1', 'ā', 'ē', 'ī', 'ō', 'ū', 'ǖ', 'v̄', 'ˉ'],
+        self::SECOND     => ['2', 'á', 'é', 'í', 'ó', 'ú', 'ǘ', 'v́', '´'],
+        self::THIRD      => ['3', 'ǎ', 'ě', 'ǐ', 'ǒ', 'ǔ', 'ǚ', 'v̌', 'ˇ'],
+        self::FOURTH     => ['4', 'à', 'è', 'ì', 'ò', 'ù', 'ǜ', 'v̀', '`'],
     ];
 
     /** @var int */
@@ -31,12 +31,12 @@ class PinyinTone
         $this->toneNumber = $toneNumber;
     }
 
-    public static function fromPinyinSyllable(PinyinSyllable $syllable): PinyinTone
+    public static function fromPinyinSyllable(PinyinSyllable $syllable): self
     {
         return static::fromPinyinSyllableString((string) $syllable);
     }
 
-    public static function fromPinyinSyllableString(string $syllable): PinyinTone
+    public static function fromPinyinSyllableString(string $syllable): self
     {
         return new static(static::determineTone($syllable));
     }
