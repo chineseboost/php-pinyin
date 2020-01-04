@@ -15,11 +15,14 @@ class PinyinSyllable
     /**
      * @param string $syllable
      */
-    public function __construct($syllable)
+    public function __construct(string $syllable)
     {
         $this->syllable = Normalizer::normalize($syllable);
     }
 
+    /**
+     * @return PinyinTone
+     */
     public function tone(): PinyinTone
     {
         if (!$this->tone) {
@@ -27,5 +30,13 @@ class PinyinSyllable
         }
 
         return $this->tone;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->syllable;
     }
 }
