@@ -37,11 +37,11 @@ class PinyinSyllable
     }
 
     /**
-     * https://en.wikipedia.org/wiki/Pinyin#Rules_for_placing_the_tone_mark
+     * https://en.wikipedia.org/wiki/Pinyin#Rules_for_placing_the_tone_mark.
      *
      * @return PinyinSyllable
      */
-    public function toneMarked(): PinyinSyllable
+    public function toneMarked(): self
     {
         $syllable = (string) $this->plain();
         $syllableLower = mb_strtolower($syllable);
@@ -57,13 +57,15 @@ class PinyinSyllable
                     mb_strtoupper($marks[$this->tone()->number()]),
                     $marked
                 );
-                return new PinyinSyllable($marked);
+
+                return new self($marked);
             }
         }
+
         return $this;
     }
 
-    public function toneNumbered(): PinyinSyllable
+    public function toneNumbered(): self
     {
         if ($this->tone()->isNeutral()) {
             return $this->plain();
@@ -71,10 +73,11 @@ class PinyinSyllable
 
         $plain = $this->plain();
         $toneNumber = $this->tone()->number();
-        return new PinyinSyllable("${plain}${toneNumber}");
+
+        return new self("${plain}${toneNumber}");
     }
 
-    public function normalized(): PinyinSyllable
+    public function normalized(): self
     {
         $syllable = Normalizer::normalize(trim($this->syllable));
         $syllable = mb_ereg_replace('[^\p{L}0-5]', '', $syllable);
@@ -85,7 +88,7 @@ class PinyinSyllable
         $firstLetter = mb_substr($syllable, 0, 1);
         if ($firstLetter === mb_strtoupper($firstLetter)) {
             $syllable = sprintf(
-                "%s%s",
+                '%s%s',
                 mb_strtoupper($firstLetter),
                 mb_strtolower(mb_substr($syllable, 1, mb_strlen($syllable) - 1))
             );
@@ -101,7 +104,7 @@ class PinyinSyllable
      *
      * @return PinyinSyllable
      */
-    public function plain(): PinyinSyllable
+    public function plain(): self
     {
         $plain = (string) $this->normalized();
         $plain = mb_ereg_replace('[0-9]+', '', $plain);
@@ -115,6 +118,7 @@ class PinyinSyllable
                 );
             }
         }
+
         return new static($plain);
     }
 

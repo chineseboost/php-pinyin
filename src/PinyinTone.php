@@ -17,7 +17,7 @@ class PinyinTone
         self::FIRST,
         self::SECOND,
         self::THIRD,
-        self::FOURTH
+        self::FOURTH,
     ];
 
     const MARK_FIRST = 'ˉ';
