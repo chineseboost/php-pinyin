@@ -13,11 +13,11 @@ class PinyinTone
     const FOURTH = 4;
 
     const TONE_INDICATORS = [
+        PinyinTone::ZERO_FIFTH => ['5', '0', '·'],
         PinyinTone::FIRST      => ['1', 'ā', 'ē', 'ī', 'ō', 'ū', 'ǖ', 'v̄', 'ˉ'],
         PinyinTone::SECOND     => ['2', 'á', 'é', 'í', 'ó', 'ú', 'ǘ', 'v́', '´'],
         PinyinTone::THIRD      => ['3', 'ǎ', 'ě', 'ǐ', 'ǒ', 'ǔ', 'ǚ', 'v̌', 'ˇ'],
         PinyinTone::FOURTH     => ['4', 'à', 'è', 'ì', 'ò', 'ù', 'ǜ', 'v̀', '`'],
-        PinyinTone::ZERO_FIFTH => ['5', '0'],
     ];
 
     /** @var int */
