@@ -4,7 +4,9 @@ namespace Pinyin;
 
 class HanziWord
 {
-    /** @var Hanzi[] */
+    /**
+     * @var Hanzi[]
+     */
     private $hanzi;
 
     /**

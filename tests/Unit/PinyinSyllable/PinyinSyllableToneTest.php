@@ -24,12 +24,15 @@ class PinyinSyllableToneTest extends TestCase
 
         // Then we should get the correct tone.
         self::assertInstanceOf(PinyinTone::class, $tone);
-        self::assertSame($expectedToneNumber, $tone->toneNumber());
+        self::assertSame($expectedToneNumber, $tone->number());
+        self::assertSame((string) $expectedToneNumber, (string) $tone);
     }
 
     public function toneProvider(): array
     {
         return [
+            ['', 0],
+            ['b', 0],
             ['ma', 0],
             ['wā', 1],
             ['xí', 2],

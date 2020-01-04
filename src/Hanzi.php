@@ -6,7 +6,9 @@ use InvalidArgumentException;
 
 class Hanzi
 {
-    /** @var string */
+    /**
+     * @var string
+     */
     private $hanzi;
 
     /**

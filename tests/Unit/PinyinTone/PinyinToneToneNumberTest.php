@@ -23,12 +23,22 @@ class PinyinToneToneNumberTest extends TestCase
         // Then it should be the correct tone number.
         self::assertSame(
             $expectedToneNumber,
-            $pinyinTone->toneNumber(),
+            $pinyinTone->number(),
             sprintf(
                 'Tone number for "%s" should be %d, but got %d',
                 $syllable,
                 $expectedToneNumber,
-                $pinyinTone->toneNumber()
+                $pinyinTone->number()
+            )
+        );
+        self::assertSame(
+            (string) $expectedToneNumber,
+            (string) $pinyinTone,
+            sprintf(
+                'Tone number for "%s" should be %d, but got %d',
+                $syllable,
+                $expectedToneNumber,
+                $pinyinTone->number()
             )
         );
     }

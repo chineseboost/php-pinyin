@@ -1,6 +1,6 @@
 .PHONY: fix
 fix: src tests vendor/autoload.php
-	./vendor/bin/php-cs-fixer fix
+	./vendor/bin/phpcbf src tests --encoding=UTF-8 --standard=PSR2
 
 .PHONY: test
 test: src tests vendor/autoload.php
