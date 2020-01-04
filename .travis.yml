@@ -7,6 +7,7 @@ php:
   - 7.3
 
 script:
+  - rm composer.lock
   - make coverage
 
 after_success:
