@@ -6,16 +6,16 @@ use PHPUnit\Framework\TestCase;
 use Pinyin\PinyinSyllable;
 
 /**
- * https://en.wikipedia.org/wiki/Pinyin_table
+ * https://en.wikipedia.org/wiki/Pinyin_table.
  */
 class PinyinTableTest extends TestCase
 {
     /**
      * @dataProvider pinyinTableProvider
      *
-     * @param  string  $initial
-     * @param  string  $final
-     * @param  string  $expectedSyllable
+     * @param string $initial
+     * @param string $final
+     * @param string $expectedSyllable
      */
     public function testPinyinTable(
         string $initial,
