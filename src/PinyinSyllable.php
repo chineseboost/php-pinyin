@@ -2,8 +2,6 @@
 
 namespace Pinyin;
 
-use Normalizer;
-
 class PinyinSyllable
 {
     /**
@@ -12,7 +10,7 @@ class PinyinSyllable
     private $syllable;
 
     /**
-     * @param  string  $syllable
+     * @param string $syllable
      */
     public function __construct(string $syllable)
     {
@@ -44,7 +42,7 @@ class PinyinSyllable
      */
     public function toneMarked(): self
     {
-        return new PinyinSyllable(PinyinTone::applyToneMark(
+        return new self(PinyinTone::applyToneMark(
             (string) $this->plain(),
             $this->tone()->number()
         ));

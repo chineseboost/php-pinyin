@@ -60,7 +60,7 @@ class PinyinSyllableNormalizedTest extends TestCase
             ['Bei3jing1', 'Bei3'],
             ['Ā Q zhèng zhuàn', 'Ā'],
             ['zhèngzhuàn', 'zhèng'],
-            ["Xī'ān", 'Xī']
+            ["Xī'ān", 'Xī'],
         ];
     }
 }

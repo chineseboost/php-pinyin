@@ -3,7 +3,7 @@
 namespace Pinyin;
 
 /**
- * https://en.wikipedia.org/wiki/Pinyin#Initials
+ * https://en.wikipedia.org/wiki/Pinyin#Initials.
  */
 class PinyinInitial
 {
