@@ -2,8 +2,6 @@
 
 namespace Pinyin;
 
-use Normalizer;
-
 class PinyinSyllable
 {
     /**
@@ -16,10 +14,8 @@ class PinyinSyllable
      */
     private $tone;
 
-
-
     /**
-     * @param  string  $syllable
+     * @param string $syllable
      */
     public function __construct(string $syllable)
     {
@@ -45,7 +41,7 @@ class PinyinSyllable
      */
     public function toneMarked(): self
     {
-        return new PinyinSyllable(PinyinTone::applyToneMark(
+        return new self(PinyinTone::applyToneMark(
             (string) $this->plain(),
             $this->tone()->number()
         ));
@@ -98,7 +94,7 @@ class PinyinSyllable
         foreach (PinyinTone::VOWEL_MARKS as $unmarkedVowel => $toneMarked) {
             foreach (array_values($toneMarked) as $markedVowel) {
                 $plain = preg_replace(
-                    sprintf("/%s/u", $markedVowel),
+                    sprintf('/%s/u', $markedVowel),
                     $unmarkedVowel,
                     $plain
                 );
