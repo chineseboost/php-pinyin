@@ -35,6 +35,8 @@ REGEXP;
         '/^Y?[Ii][eE]$/u' => 'Ye',
         '/^y?iu$/u'       => 'you',
         '/^Y?[Ii][uU]$/u' => 'You',
+        '/^un$/u'         => 'wen',
+        '/^Un$/u'         => 'Wen',
         '/^ü/u'           => 'yu',
         '/^Ü/u'           => 'Yu',
         '/^u$/u'          => 'wu',
@@ -43,6 +45,8 @@ REGEXP;
         '/^U[iI]$/u'      => 'Wei',
         '/^u/u'           => 'w',
         '/^U/u'           => 'W',
+        '/(y|Y)i([^n])/u' => '$1$2',
+        '/([jqx])ü/u'     => '$1u',
     ];
 
     public static function extractFirstSyllable(string $haystack): string
@@ -83,16 +87,28 @@ REGEXP;
      */
     public static function generateSyllablePattern(): string
     {
-        return Normalizer::normalize(sprintf(
-            '/(%s)?(%s)(r)?([0-5])?/ui',
-            implode('|', array_merge(PinyinInitial::INITIALS, PinyinInitial::ORTHOGRAPHICS)),
-            implode('|', array_merge(...array_map(function (string $final): array {
-                return array_map(function (int $tone) use ($final): string {
-                    return PinyinTone::applyToneMark($final, $tone);
-                }, PinyinTone::TONE_NUMBERS);
-            },
-            PinyinFinal::FINALS)))
-        ));
+        return Normalizer::normalize(
+            sprintf(
+                '/(%s)?(%s)(r)?([0-5])?/ui',
+                implode('|', array_merge(PinyinInitial::INITIALS, PinyinInitial::ORTHOGRAPHICS)),
+                implode(
+                    '|',
+                    array_merge(
+                        ...array_map(
+                            function (string $final): array {
+                                return array_map(
+                                    function (int $tone) use ($final): string {
+                                        return PinyinTone::applyToneMark($final, $tone);
+                                    },
+                                    PinyinTone::TONE_NUMBERS
+                                );
+                            },
+                            PinyinFinal::FINALS
+                        )
+                    )
+                )
+            )
+        );
     }
 
     public static function normalize(string $input): string
