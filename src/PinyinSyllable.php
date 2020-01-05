@@ -39,11 +39,11 @@ class PinyinSyllable
     }
 
     /**
-     * https://en.wikipedia.org/wiki/Pinyin#Rules_for_placing_the_tone_mark
+     * https://en.wikipedia.org/wiki/Pinyin#Rules_for_placing_the_tone_mark.
      *
      * @return PinyinSyllable
      */
-    public function toneMarked(): PinyinSyllable
+    public function toneMarked(): self
     {
         return new PinyinSyllable(PinyinTone::applyToneMark(
             (string) $this->plain(),
@@ -51,7 +51,7 @@ class PinyinSyllable
         ));
     }
 
-    public function toneNumbered(): PinyinSyllable
+    public function toneNumbered(): self
     {
         if ($this->tone()->isNeutral()) {
             return $this->plain();
@@ -59,10 +59,11 @@ class PinyinSyllable
 
         $plain = $this->plain();
         $toneNumber = $this->tone()->number();
-        return new PinyinSyllable("${plain}${toneNumber}");
+
+        return new self("${plain}${toneNumber}");
     }
 
-    public function normalized(): PinyinSyllable
+    public function normalized(): self
     {
         mb_internal_encoding('UTF-8');
         $syllable = PinyinRegex::extractFirstSyllable((string) $this->syllable);
@@ -73,7 +74,7 @@ class PinyinSyllable
         if ($firstLetter === mb_strtoupper($firstLetter)) {
             $syllable =
                 sprintf(
-                    "%s%s",
+                    '%s%s',
                     mb_strtoupper($firstLetter),
                     mb_strtolower(mb_substr($syllable, 1, mb_strlen($syllable) - 1))
                 );
@@ -89,7 +90,7 @@ class PinyinSyllable
      *
      * @return PinyinSyllable
      */
-    public function plain(): PinyinSyllable
+    public function plain(): self
     {
         mb_internal_encoding('UTF-8');
         $plain = (string) $this->normalized();
@@ -108,6 +109,7 @@ class PinyinSyllable
                 );
             }
         }
+
         return new static($plain);
     }
 
