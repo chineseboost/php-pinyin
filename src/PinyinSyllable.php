@@ -12,13 +12,6 @@ class PinyinSyllable
     private $syllable;
 
     /**
-     * @var PinyinTone
-     */
-    private $tone;
-
-
-
-    /**
      * @param  string  $syllable
      */
     public function __construct(string $syllable)
@@ -26,16 +19,22 @@ class PinyinSyllable
         $this->syllable = $syllable;
     }
 
+    public function pinyinInitial(): PinyinInitial
+    {
+        return new PinyinInitial(PinyinRegex::extractFirstInitial($this->normalized()));
+    }
+
+    public function pinyinFinal(): PinyinFinal
+    {
+        return new PinyinFinal(PinyinRegex::extractFirstFinal($this->normalized()));
+    }
+
     /**
      * @return PinyinTone
      */
     public function tone(): PinyinTone
     {
-        if (!$this->tone) {
-            $this->tone = PinyinTone::fromPinyinSyllable($this);
-        }
-
-        return $this->tone;
+        return PinyinTone::fromPinyinSyllable($this);
     }
 
     /**
@@ -67,8 +66,10 @@ class PinyinSyllable
     {
         mb_internal_encoding('UTF-8');
         $syllable = PinyinRegex::extractFirstSyllable((string) $this->syllable);
-        $syllable = preg_replace('/v/u', 'ü', $syllable, 1);
-        $syllable = preg_replace('/V/u', 'Ü', $syllable, 1);
+
+        foreach (PinyinRegex::NORMALIZATIONS as $pattern => $replacement) {
+            $syllable = preg_replace($pattern, $replacement, $syllable);
+        }
 
         $firstLetter = mb_substr($syllable, 0, 1);
         if ($firstLetter === mb_strtoupper($firstLetter)) {
@@ -95,20 +96,7 @@ class PinyinSyllable
         mb_internal_encoding('UTF-8');
         $plain = (string) $this->normalized();
         $plain = preg_replace('/[0-9]+/u', '', $plain);
-        foreach (PinyinTone::VOWEL_MARKS as $unmarkedVowel => $toneMarked) {
-            foreach (array_values($toneMarked) as $markedVowel) {
-                $plain = preg_replace(
-                    sprintf("/%s/u", $markedVowel),
-                    $unmarkedVowel,
-                    $plain
-                );
-                $plain = preg_replace(
-                    sprintf('/%s/u', mb_strtoupper($markedVowel)),
-                    mb_strtoupper($unmarkedVowel),
-                    $plain
-                );
-            }
-        }
+        $plain = PinyinTone::stripToneMarks($plain);
 
         return new static($plain);
     }

@@ -166,6 +166,27 @@ class PinyinTone
         return $unmarked;
     }
 
+    public static function stripToneMarks(string $marked): string
+    {
+        mb_internal_encoding('UTF-8');
+        $unmarked = Normalizer::normalize(trim($marked));
+        foreach (static::VOWEL_MARKS as $unmarkedVowel => $toneMarked) {
+            foreach (array_values($toneMarked) as $markedVowel) {
+                $unmarked = preg_replace(
+                    sprintf("/%s/u", $markedVowel),
+                    $unmarkedVowel,
+                    $unmarked
+                );
+                $unmarked = preg_replace(
+                    sprintf('/%s/u', mb_strtoupper($markedVowel)),
+                    mb_strtoupper($unmarkedVowel),
+                    $unmarked
+                );
+            }
+        }
+        return $unmarked;
+    }
+
     public function number(): int
     {
         return $this->toneNumber;

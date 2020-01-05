@@ -2,6 +2,8 @@
 
 namespace Pinyin;
 
+use Normalizer;
+
 /**
  * Class PinyinFinal
  *
@@ -60,7 +62,7 @@ class PinyinFinal
      */
     public function __construct(string $final)
     {
-        $this->final = trim($final);
+        $this->final = $final;
     }
 
     public function __toString()

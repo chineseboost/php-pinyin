@@ -2,6 +2,7 @@ composer.phar
 vendor/
 build/
 .idea/
+/scripts/
 *.cache
 *.log
 *.tmp

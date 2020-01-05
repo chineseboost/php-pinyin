@@ -49,6 +49,7 @@ class PinyinSyllableNormalizedTest extends TestCase
             ['lü', 'lü'],
             ['lu', 'lu'],
             ['LV', 'Lü'],
+            ['ü', 'yu'],
             ['Biang3', 'Biang3'],
             [" \nnian3  ", 'nian3'],
             [" \tkao6  ", 'kao'],
