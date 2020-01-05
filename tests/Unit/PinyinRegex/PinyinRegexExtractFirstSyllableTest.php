@@ -10,8 +10,8 @@ class PinyinRegexExtractFirstSyllableTest extends TestCase
     /**
      * @dataProvider extractFirstSyllableProvider
      *
-     * @param  string  $haystack
-     * @param  string  $expectedFirstSyllable
+     * @param string $haystack
+     * @param string $expectedFirstSyllable
      */
     public function testExtractFirstSyllable(string $haystack, string $expectedFirstSyllable)
     {
@@ -54,7 +54,7 @@ class PinyinRegexExtractFirstSyllableTest extends TestCase
             ['Bei3jing1', 'Bei3'],
             ['Ā Q zhèng zhuàn', 'Ā'],
             ['zhèngzhuàn', 'zhèng'],
-            ["Xī'ān", 'Xī']
+            ["Xī'ān", 'Xī'],
         ];
     }
 }

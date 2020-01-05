@@ -10,9 +10,9 @@ class PinyinToneApplyToneMarkTest extends TestCase
     /**
      * @dataProvider applyToneMarkProvider
      *
-     * @param  string  $input
-     * @param  int  $toneNumber
-     * @param  string  $expectedToneMarked
+     * @param string $input
+     * @param int    $toneNumber
+     * @param string $expectedToneMarked
      */
     public function testApplyToneMark(
         string $input,

@@ -160,9 +160,11 @@ class PinyinTone
                     $marked,
                     1
                 );
+
                 return $marked;
             }
         }
+
         return $unmarked;
     }
 

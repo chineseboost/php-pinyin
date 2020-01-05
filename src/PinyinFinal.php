@@ -3,9 +3,7 @@
 namespace Pinyin;
 
 /**
- * Class PinyinFinal
- *
- * @package Pinyinhttps://en.wikipedia.org/wiki/Pinyin_table
+ * Class PinyinFinal.
  */
 class PinyinFinal
 {
