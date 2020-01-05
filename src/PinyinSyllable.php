@@ -16,8 +16,10 @@ class PinyinSyllable
      */
     private $tone;
 
+
+
     /**
-     * @param string $syllable
+     * @param  string  $syllable
      */
     public function __construct(string $syllable)
     {
@@ -43,24 +45,10 @@ class PinyinSyllable
      */
     public function toneMarked(): PinyinSyllable
     {
-        $syllable = (string) $this->plain();
-        $syllableLower = mb_strtolower($syllable);
-        foreach (PinyinTone::VOWEL_MARKS as $vowel => $marks) {
-            if (mb_strpos($syllableLower, $vowel) !== false) {
-                $marked = mb_ereg_replace(
-                    $vowel,
-                    $marks[$this->tone()->number()],
-                    $syllable
-                );
-                $marked = mb_ereg_replace(
-                    mb_strtoupper($vowel),
-                    mb_strtoupper($marks[$this->tone()->number()]),
-                    $marked
-                );
-                return new PinyinSyllable($marked);
-            }
-        }
-        return $this;
+        return new PinyinSyllable(PinyinTone::applyToneMark(
+            (string) $this->plain(),
+            $this->tone()->number()
+        ));
     }
 
     public function toneNumbered(): PinyinSyllable
@@ -76,19 +64,19 @@ class PinyinSyllable
 
     public function normalized(): PinyinSyllable
     {
-        $syllable = Normalizer::normalize(trim($this->syllable));
-        $syllable = mb_ereg_replace('[^\p{L}0-5]', '', $syllable);
-        $syllable = mb_substr($syllable, 0, 6);
-        $syllable = mb_ereg_replace('v', 'ü', $syllable);
-        $syllable = mb_ereg_replace('V', 'Ü', $syllable);
+        mb_internal_encoding('UTF-8');
+        $syllable = PinyinRegex::extractFirstSyllable((string) $this->syllable);
+        $syllable = preg_replace('/v/u', 'ü', $syllable, 1);
+        $syllable = preg_replace('/V/u', 'Ü', $syllable, 1);
 
         $firstLetter = mb_substr($syllable, 0, 1);
         if ($firstLetter === mb_strtoupper($firstLetter)) {
-            $syllable = sprintf(
-                "%s%s",
-                mb_strtoupper($firstLetter),
-                mb_strtolower(mb_substr($syllable, 1, mb_strlen($syllable) - 1))
-            );
+            $syllable =
+                sprintf(
+                    "%s%s",
+                    mb_strtoupper($firstLetter),
+                    mb_strtolower(mb_substr($syllable, 1, mb_strlen($syllable) - 1))
+                );
         } else {
             $syllable = mb_strtolower($syllable);
         }
@@ -103,13 +91,18 @@ class PinyinSyllable
      */
     public function plain(): PinyinSyllable
     {
+        mb_internal_encoding('UTF-8');
         $plain = (string) $this->normalized();
-        $plain = mb_ereg_replace('[0-9]+', '', $plain);
+        $plain = preg_replace('/[0-9]+/u', '', $plain);
         foreach (PinyinTone::VOWEL_MARKS as $unmarkedVowel => $toneMarked) {
             foreach (array_values($toneMarked) as $markedVowel) {
-                $plain = mb_ereg_replace($markedVowel, $unmarkedVowel, $plain);
-                $plain = mb_ereg_replace(
-                    mb_strtoupper($markedVowel),
+                $plain = preg_replace(
+                    sprintf("/%s/u", $markedVowel),
+                    $unmarkedVowel,
+                    $plain
+                );
+                $plain = preg_replace(
+                    sprintf('/%s/u', mb_strtoupper($markedVowel)),
                     mb_strtoupper($unmarkedVowel),
                     $plain
                 );

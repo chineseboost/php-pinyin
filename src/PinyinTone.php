@@ -125,6 +125,7 @@ class PinyinTone
 
     public static function determineTone(string $syllable): int
     {
+        mb_internal_encoding('UTF-8');
         $syllable = mb_strtolower(Normalizer::normalize($syllable));
         foreach (static::TONE_INDICATORS as $tone => $toneIndicators) {
             foreach ($toneIndicators as $toneIndicator) {
@@ -135,6 +136,34 @@ class PinyinTone
         }
 
         return static::ZERO_FIFTH;
+    }
+
+    public static function applyToneMark(string $unmarked, int $toneNumber): string
+    {
+        mb_internal_encoding('UTF-8');
+        $unmarked = Normalizer::normalize($unmarked);
+        if (static::isNeutralToneNumber($toneNumber)) {
+            return $unmarked;
+        }
+        $unmarkedLower = mb_strtolower($unmarked);
+        foreach (static::VOWEL_MARKS as $vowel => $marks) {
+            if (mb_strpos($unmarkedLower, $vowel) !== false) {
+                $marked = preg_replace(
+                    sprintf('/%s/u', $vowel),
+                    $marks[$toneNumber],
+                    $unmarked,
+                    1
+                );
+                $marked = preg_replace(
+                    sprintf('/%s/u', mb_strtoupper($vowel)),
+                    mb_strtoupper($marks[$toneNumber]),
+                    $marked,
+                    1
+                );
+                return $marked;
+            }
+        }
+        return $unmarked;
     }
 
     public function number(): int
@@ -164,11 +193,16 @@ class PinyinTone
 
     public function isNeutral(): bool
     {
-        return $this->number() === static::ZERO_FIFTH;
+        return static::isNeutralToneNumber($this->number());
     }
 
     public function __toString()
     {
         return (string) $this->toneNumber;
+    }
+
+    private static function isNeutralToneNumber(int $toneNumber): bool
+    {
+        return $toneNumber === 0 || $toneNumber === 5;
     }
 }

@@ -16,6 +16,7 @@ class Hanzi
      */
     public function __construct($hanzi)
     {
+        mb_internal_encoding('UTF-8');
         if (mb_strlen($hanzi) !== 1) {
             throw new InvalidArgumentException(
                 "Hanzi must be a single character, given ${hanzi}"

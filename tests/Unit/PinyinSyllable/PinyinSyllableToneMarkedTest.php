@@ -69,7 +69,7 @@ class PinyinSyllableToneMarkedTest extends TestCase
             ['AI4', 'Ài'],
             ['ai5', 'ai'],
             ['AI5', 'Ai'],
-            ['b', 'b'],
+            ['b', ''],
             ['Bei3', 'Běi'],
             ['BEI3', 'Běi'],
             ['biang1', 'biāng'],

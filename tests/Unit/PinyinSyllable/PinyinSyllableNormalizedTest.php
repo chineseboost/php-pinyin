@@ -45,11 +45,21 @@ class PinyinSyllableNormalizedTest extends TestCase
             [' a  ', 'a'],
             [' a1  ', 'a1'],
             [' ā  ', 'ā'],
+            ['lv', 'lü'],
+            ['lü', 'lü'],
+            ['lu', 'lu'],
+            ['LV', 'Lü'],
+            ['Biang3', 'Biang3'],
             [" \nnian3  ", 'nian3'],
             [" \tkao6  ", 'kao'],
             [' zui0 ', 'zui0'],
             [' meng5 ', 'meng5'],
             ['-_++==shen1^%', 'shen1'],
+            ['wu2wei2', 'wu2'],
+            ['Bei3jing1', 'Bei3'],
+            ['Ā Q zhèng zhuàn', 'Ā'],
+            ['zhèngzhuàn', 'zhèng'],
+            ["Xī'ān", 'Xī']
         ];
     }
 }

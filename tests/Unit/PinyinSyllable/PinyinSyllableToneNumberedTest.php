@@ -69,7 +69,7 @@ class PinyinSyllableToneNumberedTest extends TestCase
             ['AI4', 'Ai4'],
             ['ai5', 'ai'],
             ['AI5', 'Ai'],
-            ['b', 'b'],
+            ['b', ''],
             ['Bei3', 'Bei3'],
             ['BEI3', 'Bei3'],
             ['biang1', 'biang1'],
