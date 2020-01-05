@@ -11,8 +11,8 @@ class PinyinSyllablePinyinFinalTest extends TestCase
     /**
      * @dataProvider pinyinFinalProvider
      *
-     * @param  string  $syllable
-     * @param  string  $expectedFinal
+     * @param string $syllable
+     * @param string $expectedFinal
      */
     public function testPinyinFinal(string $syllable, string $expectedFinal)
     {

@@ -10,8 +10,8 @@ class PinyinRegexExtractFirstInitialTest extends TestCase
     /**
      * @dataProvider extractFirstInitialProvider
      *
-     * @param  string  $input
-     * @param  string  $expectedFirstInitial
+     * @param string $input
+     * @param string $expectedFirstInitial
      */
     public function testExtractFirstInitial(
         string $input,
