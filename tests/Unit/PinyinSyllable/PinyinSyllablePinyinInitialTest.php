@@ -11,8 +11,8 @@ class PinyinSyllablePinyinInitialTest extends TestCase
     /**
      * @dataProvider pinyinInitialProvider
      *
-     * @param  string  $syllable
-     * @param  string  $expectedInitial
+     * @param string $syllable
+     * @param string $expectedInitial
      */
     public function testPinyinInitial(string $syllable, string $expectedInitial)
     {

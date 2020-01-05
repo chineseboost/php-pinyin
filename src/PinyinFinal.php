@@ -2,8 +2,6 @@
 
 namespace Pinyin;
 
-use Normalizer;
-
 /**
  * Class PinyinFinal.
  */

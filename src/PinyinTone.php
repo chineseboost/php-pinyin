@@ -175,7 +175,7 @@ class PinyinTone
         foreach (static::VOWEL_MARKS as $unmarkedVowel => $toneMarked) {
             foreach (array_values($toneMarked) as $markedVowel) {
                 $unmarked = preg_replace(
-                    sprintf("/%s/u", $markedVowel),
+                    sprintf('/%s/u', $markedVowel),
                     $unmarkedVowel,
                     $unmarked
                 );
@@ -186,6 +186,7 @@ class PinyinTone
                 );
             }
         }
+
         return $unmarked;
     }
 

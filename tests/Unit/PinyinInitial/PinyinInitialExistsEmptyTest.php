@@ -10,8 +10,8 @@ class PinyinInitialExistsEmptyTest extends TestCase
     /**
      * @dataProvider existsIsEmptyProvider
      *
-     * @param  string  $syllable
-     * @param  bool  $expectedExists
+     * @param string $syllable
+     * @param bool   $expectedExists
      */
     public function testExistsIsEmpty(string $syllable, bool $expectedExists)
     {
