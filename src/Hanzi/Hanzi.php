@@ -1,6 +1,6 @@
 <?php
 
-namespace Pinyin;
+namespace Pinyin\Hanzi;
 
 use InvalidArgumentException;
 
