@@ -2,7 +2,9 @@
 
 namespace Pinyin;
 
-class PinyinSyllable
+use Pinyin\String\Normalizing;
+
+class PinyinSyllable implements Normalizing
 {
     /**
      * @var string
@@ -60,7 +62,7 @@ class PinyinSyllable
         return new self("${plain}${toneNumber}");
     }
 
-    public function normalized(): self
+    public function normalized(): Normalizing
     {
         mb_internal_encoding('UTF-8');
         $syllable = PinyinRegex::extractFirstSyllable((string) $this->syllable);
@@ -102,7 +104,7 @@ class PinyinSyllable
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->syllable;
     }

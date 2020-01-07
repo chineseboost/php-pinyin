@@ -571,7 +571,5 @@ class PinyinTableTest extends TestCase
                 yield [$initial, $final, $expectedSyllable];
             }
         }
-
-//        yield ['', 'ing', 'ying'];
     }
 }

@@ -2,6 +2,6 @@
 
 namespace Pinyin;
 
-class PinyinString
+class PinyinSentence
 {
 }

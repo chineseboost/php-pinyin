@@ -52,7 +52,6 @@ REGEXP;
     public static function extractFirstSyllable(string $haystack): string
     {
         $haystack = static::normalize($haystack);
-        $haystack = mb_substr($haystack, 0, 6);
         preg_match(static::SYLLABLE_PATTERN, $haystack, $matches);
 
         return $matches[0] ?? '';
@@ -115,7 +114,7 @@ REGEXP;
     {
         mb_internal_encoding('UTF-8');
         $input = Normalizer::normalize(trim($input));
-        $input = preg_replace('/[^\p{L}0-5]/u', '', $input);
+        $input = preg_replace('/[^\p{L}0-5 ]/u', '', $input);
 
         return $input;
     }
