@@ -11,7 +11,7 @@ class NonPinyinString implements Normalizing
     private $string;
 
     /**
-     * @param  string  $string
+     * @param string $string
      */
     public function __construct(string $string)
     {

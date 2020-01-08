@@ -10,8 +10,8 @@ class PinyinWordSyllablesTest extends TestCase
     /**
      * @dataProvider syllablesProvider
      *
-     * @param  string  $word
-     * @param  string[]  $expectedSyllables
+     * @param string   $word
+     * @param string[] $expectedSyllables
      */
     public function testSyllables(string $word, array $expectedSyllables)
     {
@@ -58,7 +58,7 @@ class PinyinWordSyllablesTest extends TestCase
             ['daor', ['daor']],
             ['wēnxīn', ['wēn', 'xīn']],
             ['Zhōngguó Rénmín Gònghéguó', ['Zhōng', 'guó', 'Rén', 'mín', 'Gòng', 'hé', 'guó']],
-            ['2020nian2', ['nian2']]
+            ['2020nian2', ['nian2']],
         ];
     }
 }

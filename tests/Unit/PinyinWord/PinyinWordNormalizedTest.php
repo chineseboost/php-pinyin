@@ -10,8 +10,8 @@ class PinyinWordNormalizedTest extends TestCase
     /**
      * @dataProvider normalizedProvider
      *
-     * @param  string  $word
-     * @param  string  $expectedNormalized
+     * @param string $word
+     * @param string $expectedNormalized
      */
     public function testNormalized(string $word, string $expectedNormalized)
     {
