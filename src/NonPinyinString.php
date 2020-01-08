@@ -20,7 +20,7 @@ class NonPinyinString implements Normalizing
 
     public function normalized(): Normalizing
     {
-        return new static(preg_replace('/\s+/ug', ' ', Normalizer::normalize($this->string)));
+        return new static(preg_replace('/\s+/u', ' ', Normalizer::normalize($this->string)));
     }
 
     public function __toString(): string

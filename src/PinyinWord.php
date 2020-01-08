@@ -2,6 +2,7 @@
 
 namespace Pinyin;
 
+use Normalizer;
 use Pinyin\String\Normalizing;
 
 class PinyinWord implements Normalizing
@@ -40,7 +41,7 @@ class PinyinWord implements Normalizing
     /**
      * @return Normalizing[]
      */
-    private function elements(): array
+    public function elements(): array
     {
         $elements = [];
         $remaining = $this->word;
@@ -48,6 +49,9 @@ class PinyinWord implements Normalizing
         for ($i = 0; mb_strlen($remaining) > 0 && $i < $this->syllableLimit; $i++) {
             $nextSyllable = PinyinRegex::extractFirstSyllable(trim($remaining));
             if (!$nextSyllable) {
+                if (mb_strlen($remaining) > 0) {
+                    array_push($elements, new NonPinyinString($remaining));
+                }
                 break;
             }
 
@@ -68,13 +72,17 @@ class PinyinWord implements Normalizing
     public function normalized(): Normalizing
     {
         return new PinyinWord(
-            implode(
-                '',
-                array_map(
-                    function (Normalizing $element): string {
-                        return (string) $element->normalized();
-                    },
-                    $this->elements()
+            Normalizer::normalize(
+                trim(
+                    implode(
+                        '',
+                        array_map(
+                            function (Normalizing $element): string {
+                                return (string) $element->normalized();
+                            },
+                            $this->elements()
+                        )
+                    )
                 )
             )
         );
