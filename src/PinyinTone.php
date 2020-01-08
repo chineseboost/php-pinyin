@@ -2,8 +2,6 @@
 
 namespace Pinyin;
 
-use Normalizer;
-
 class PinyinTone
 {
     const ZERO_FIFTH = 0;

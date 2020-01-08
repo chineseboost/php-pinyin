@@ -2,7 +2,6 @@
 
 namespace Pinyin;
 
-use Normalizer;
 use Pinyin\String\Normalizing;
 
 class PinyinWord implements Normalizing
@@ -14,8 +13,8 @@ class PinyinWord implements Normalizing
     private $syllableLimit;
 
     /**
-     * @param  string  $word
-     * @param  int  $syllableLimit
+     * @param string $word
+     * @param int    $syllableLimit
      */
     public function __construct(string $word, int $syllableLimit = 100)
     {
@@ -72,6 +71,7 @@ class PinyinWord implements Normalizing
     public function normalized(): Normalizing
     {
         $toneMarked = PinyinTone::isToneMarked($this->word);
+
         return new self(
             PinyinRegex::normalize(
                 implode(
@@ -81,6 +81,7 @@ class PinyinWord implements Normalizing
                             if ($toneMarked && $element instanceof PinyinSyllable) {
                                 return $element->toneMarked();
                             }
+
                             return $element->normalized();
                         },
                         $this->elements()
