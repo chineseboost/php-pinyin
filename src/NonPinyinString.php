@@ -2,7 +2,6 @@
 
 namespace Pinyin;
 
-use Normalizer;
 use Pinyin\String\Normalizing;
 
 class NonPinyinString implements Normalizing
@@ -20,7 +19,7 @@ class NonPinyinString implements Normalizing
 
     public function normalized(): Normalizing
     {
-        return new static(preg_replace('/\s+/u', ' ', Normalizer::normalize($this->string)));
+        return new static(preg_replace('/\s+/u', ' ', PinyinRegex::normalize($this->string)));
     }
 
     public function __toString(): string

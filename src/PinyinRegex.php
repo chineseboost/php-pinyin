@@ -26,6 +26,10 @@ REGEXP;
 REGEXP;
     // phpcs:enable
 
+    const TONE_MARKED_PATTERN = <<<'REGEXP'
+/[àáèéìíòóùúāēěīōūǎǐǒǔǖǘǚǜ]/u
+REGEXP;
+
     const NORMALIZATIONS = [
         '/v/u'            => 'ü',
         '/V/u'            => 'Ü',

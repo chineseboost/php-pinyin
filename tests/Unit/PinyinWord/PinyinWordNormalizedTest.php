@@ -33,7 +33,8 @@ class PinyinWordNormalizedTest extends TestCase
         return [
             [' qing1dao3 ', 'qing1dao3'],
             [' xīxüèguǐ ', 'xīxuèguǐ'],
-            ['Běijing1', 'Běijing1'], // TODO: would be nice if it kept tone markings consistent.
+            ['Běijing1', 'Běijīng'],
+            ['Bei3jīng', 'Běijīng'],
         ];
     }
 }

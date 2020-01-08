@@ -14,8 +14,8 @@ class PinyinWord implements Normalizing
     private $syllableLimit;
 
     /**
-     * @param string $word
-     * @param int    $syllableLimit
+     * @param  string  $word
+     * @param  int  $syllableLimit
      */
     public function __construct(string $word, int $syllableLimit = 100)
     {
@@ -47,7 +47,7 @@ class PinyinWord implements Normalizing
         $remaining = $this->word;
 
         for ($i = 0; mb_strlen($remaining) > 0 && $i < $this->syllableLimit; $i++) {
-            $nextSyllable = PinyinRegex::extractFirstSyllable(trim($remaining));
+            $nextSyllable = PinyinRegex::extractFirstSyllable($remaining);
             if (!$nextSyllable) {
                 if (mb_strlen($remaining) > 0) {
                     array_push($elements, new NonPinyinString($remaining));
@@ -71,17 +71,19 @@ class PinyinWord implements Normalizing
 
     public function normalized(): Normalizing
     {
+        $toneMarked = PinyinTone::isToneMarked($this->word);
         return new self(
-            Normalizer::normalize(
-                trim(
-                    implode(
-                        '',
-                        array_map(
-                            function (Normalizing $element): string {
-                                return (string) $element->normalized();
-                            },
-                            $this->elements()
-                        )
+            PinyinRegex::normalize(
+                implode(
+                    '',
+                    array_map(
+                        function (Normalizing $element) use ($toneMarked): string {
+                            if ($toneMarked && $element instanceof PinyinSyllable) {
+                                return $element->toneMarked();
+                            }
+                            return $element->normalized();
+                        },
+                        $this->elements()
                     )
                 )
             )

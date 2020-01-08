@@ -125,8 +125,7 @@ class PinyinTone
 
     public static function determineTone(string $syllable): int
     {
-        mb_internal_encoding('UTF-8');
-        $syllable = mb_strtolower(Normalizer::normalize($syllable));
+        $syllable = mb_strtolower(PinyinRegex::normalize($syllable));
         foreach (static::TONE_INDICATORS as $tone => $toneIndicators) {
             foreach ($toneIndicators as $toneIndicator) {
                 if (mb_strpos($syllable, $toneIndicator) !== false) {
@@ -141,7 +140,7 @@ class PinyinTone
     public static function applyToneMark(string $unmarked, int $toneNumber): string
     {
         mb_internal_encoding('UTF-8');
-        $unmarked = Normalizer::normalize($unmarked);
+        $unmarked = PinyinRegex::normalize($unmarked);
         if (static::isNeutralToneNumber($toneNumber)) {
             return $unmarked;
         }
@@ -170,8 +169,7 @@ class PinyinTone
 
     public static function stripToneMarks(string $marked): string
     {
-        mb_internal_encoding('UTF-8');
-        $unmarked = Normalizer::normalize(trim($marked));
+        $unmarked = PinyinRegex::normalize($marked);
         foreach (static::VOWEL_MARKS as $unmarkedVowel => $toneMarked) {
             foreach (array_values($toneMarked) as $markedVowel) {
                 $unmarked = preg_replace(
@@ -188,6 +186,11 @@ class PinyinTone
         }
 
         return $unmarked;
+    }
+
+    public static function isToneMarked(string $pinyin): bool
+    {
+        return (bool) preg_match(PinyinRegex::TONE_MARKED_PATTERN, $pinyin);
     }
 
     public function number(): int

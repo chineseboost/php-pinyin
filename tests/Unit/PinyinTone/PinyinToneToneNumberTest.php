@@ -90,7 +90,6 @@ class PinyinToneToneNumberTest extends TestCase
             ['xiōng', 1],
             ['yū', 1],
             ['lǖ', 1],
-            ['lv̄', 1],
             ['niáo', 2],
             ['hén', 2],
             ['mí', 2],

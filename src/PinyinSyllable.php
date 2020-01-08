@@ -83,6 +83,10 @@ class PinyinSyllable implements Normalizing
             $syllable = mb_strtolower($syllable);
         }
 
+        if (PinyinTone::isToneMarked($syllable)) {
+            $syllable = preg_replace('/[0-5]+/u', '', $syllable);
+        }
+
         return new static($syllable);
     }
 
@@ -99,6 +103,11 @@ class PinyinSyllable implements Normalizing
         $plain = PinyinTone::stripToneMarks($plain);
 
         return new static($plain);
+    }
+
+    public function isToneMarked(): bool
+    {
+        return PinyinTone::isToneMarked($this->syllable);
     }
 
     /**
