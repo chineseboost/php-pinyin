@@ -14,8 +14,8 @@ class PinyinWord implements Normalizing
     private $syllableLimit;
 
     /**
-     * @param  string  $word
-     * @param  int  $syllableLimit
+     * @param string $word
+     * @param int    $syllableLimit
      */
     public function __construct(string $word, int $syllableLimit = 100)
     {
@@ -71,7 +71,7 @@ class PinyinWord implements Normalizing
 
     public function normalized(): Normalizing
     {
-        return new PinyinWord(
+        return new self(
             Normalizer::normalize(
                 trim(
                     implode(
