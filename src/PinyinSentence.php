@@ -14,7 +14,7 @@ class PinyinSentence implements Normalizing
 
     /**
      * @param string $sentence
-     * @param int $wordLimit
+     * @param int    $wordLimit
      */
     public function __construct(string $sentence, int $wordLimit = 1000)
     {
@@ -39,7 +39,7 @@ class PinyinSentence implements Normalizing
     {
         $words = [];
         $remaining = $this->sentence;
-        $currentWord = "";
+        $currentWord = '';
 
         for ($i = 0; mb_strlen($remaining) > 0 && $i < $this->wordLimit; $i++) {
             $nextSyllable = PinyinRegex::extractFirstSyllable($remaining);
