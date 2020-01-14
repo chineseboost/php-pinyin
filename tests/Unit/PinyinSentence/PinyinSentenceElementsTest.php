@@ -11,7 +11,7 @@ class PinyinSentenceElementsTest extends TestCase
      * @dataProvider elementsProvider
      *
      * @param string $sentence
-     * @param array $expectedElements
+     * @param array  $expectedElements
      */
     public function testElements(string $sentence, array $expectedElements)
     {
@@ -55,7 +55,7 @@ class PinyinSentenceElementsTest extends TestCase
     public function elementsProvider(): array
     {
         return [
-            ['Wo3 yao4 qu4 Bei3jing1 le', ['Wo3', 'yao4', 'qu4', 'Bei3jing1', 'le']]
+            ['Wo3 yao4 qu4 Bei3jing1 le', ['Wo3', 'yao4', 'qu4', 'Bei3jing1', 'le']],
         ];
     }
 }
