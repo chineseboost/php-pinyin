@@ -26,7 +26,8 @@ class PinyinSentence implements Normalizing
     {
         return new static(
             preg_replace(
-                '/\s+/u', ' ',
+                '/\s+/u',
+                ' ',
                 PinyinRegex::normalize($this->sentence)
             )
         );
@@ -37,7 +38,7 @@ class PinyinSentence implements Normalizing
      */
     public function elements(): array
     {
-        $words = [];
+        $elements = [];
         $remaining = $this->sentence;
         $currentWord = '';
 
@@ -58,9 +59,9 @@ class PinyinSentence implements Normalizing
                 continue;
             }
 
-            $nextSyllableFirstLetter = mb_substr($nextSyllable, 0, 1);
+            $nextSyllableFirst = mb_substr($nextSyllable, 0, 1);
             if (mb_strlen($currentWord) === 0
-                || $nextSyllableFirstLetter === mb_strtoupper($nextSyllableFirstLetter)
+                || $nextSyllableFirst === mb_strtoupper($nextSyllableFirst)
             ) {
                 $currentWord .= " ${nextSyllable} ";
                 $remaining = mb_substr($remaining, mb_strlen($nextSyllable));
@@ -72,7 +73,7 @@ class PinyinSentence implements Normalizing
             $remaining = mb_substr($remaining, mb_strlen($nextSyllable));
         }
 
-        return $words;
+        return $elements;
     }
 
     public function __toString(): string
