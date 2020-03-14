@@ -1,5 +1,5 @@
 {
-    "name": "hughgrigg/php-pinyin",
+    "name": "chineseboost/php-pinyin",
     "description": "Pinyin and hanzi tools in pure PHP | 纯PHP的汉语拼音和汉字工具",
     "type": "library",
     "license": "MIT",
