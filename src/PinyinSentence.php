@@ -13,8 +13,8 @@ class PinyinSentence implements Normalizing
     private $wordLimit;
 
     /**
-     * @param string $sentence
-     * @param int    $wordLimit
+     * @param  string  $sentence
+     * @param  int  $wordLimit
      */
     public function __construct(string $sentence, int $wordLimit = 1000)
     {
@@ -39,38 +39,69 @@ class PinyinSentence implements Normalizing
     public function elements(): array
     {
         $elements = [];
-        $remaining = $this->sentence;
-        $currentWord = '';
 
-        for ($i = 0; mb_strlen($remaining) > 0 && $i < $this->wordLimit; $i++) {
-            $nextSyllable = PinyinRegex::extractFirstSyllable($remaining);
-            if (!$nextSyllable) {
-                if (mb_strlen($remaining) > 0) {
-                    array_push($elements, new NonPinyinString($remaining));
+        $naturalWords = preg_split('/\s+/u', $this->sentence);
+        foreach ($naturalWords as $naturalWord) {
+            $remaining = $naturalWord;
+            $joinedWord = '';
+            for ($i = 0; $remaining !== '' && $i < $this->wordLimit; $i++) {
+                $nextSyllable = PinyinRegex::extractFirstSyllable($remaining);
+
+                if ($nextSyllable === $naturalWord) {
+                    // Natural word is a valid syllable.
+                    // Add and go to the next natural word.
+                    $elements[] = new PinyinWord(trim($nextSyllable));
+                    break;
                 }
-                break;
-            }
 
-            $nextSyllablePos = mb_strpos($remaining, $nextSyllable);
-            if ($nextSyllablePos !== 0) {
-                $nonSyllable = mb_substr($remaining, 0, $nextSyllablePos);
-                array_push($elements, new NonPinyinString($nonSyllable));
-                $remaining = mb_substr($remaining, mb_strlen($nonSyllable));
-                continue;
-            }
+                if ($nextSyllable === $remaining) {
+                    // We've finished this joined word.
+                    // Add and go to the next natural word.
+                    $joinedWord .= $nextSyllable;
+                    $elements[] = new PinyinWord(trim($joinedWord));
+                    break;
+                }
 
-            $nextSyllableFirst = mb_substr($nextSyllable, 0, 1);
-            if (mb_strlen($currentWord) === 0
-                || $nextSyllableFirst === mb_strtoupper($nextSyllableFirst)
-            ) {
-                $currentWord .= " ${nextSyllable} ";
+                if (!$nextSyllable) {
+                    // No more valid syllables.
+                    if ($joinedWord) {
+                        // Add the joined word so far.
+                        $elements[] = new PinyinWord($joinedWord);
+                    }
+                    if ($remaining) {
+                        // Add any remaining non-pinyin.
+                        $elements[] = new NonPinyinString($remaining);
+                    }
+                    // Go to the next natural word.
+                    break;
+                }
+
+                $nextSyllablePos = mb_strpos($remaining, $nextSyllable);
+                if ($nextSyllablePos !== 0) {
+                    // There is some non-pinyin before we get to a syllable.
+                    // Extract joined word so far plus non-pinyin, and continue
+                    // with this natural word.
+                    if ($joinedWord) {
+                        $elements[] = new PinyinWord($joinedWord);
+                        $joinedWord = '';
+                    }
+                    $nonSyllable = mb_substr($remaining, 0, $nextSyllablePos);
+                    $elements[] = new NonPinyinString($nonSyllable);
+                    $remaining = mb_substr($remaining, mb_strlen($nonSyllable));
+                    continue;
+                }
+
+                // Next syllable is at beginning of remaining joined word.
+                $firstOfNext = mb_substr($nextSyllable, 0, 1);
+                if ($joinedWord && mb_strtoupper($firstOfNext) === $firstOfNext) {
+                    // Uppercase new word; cut off the joined word here.
+                    $elements[] = new PinyinWord($joinedWord);
+                    $joinedWord = '';
+                }
+
+                $joinedWord .= $nextSyllable;
                 $remaining = mb_substr($remaining, mb_strlen($nextSyllable));
-                continue;
             }
-
-            array_push($elements, new PinyinWord(trim($currentWord)));
-            $currentWord = '';
-            $remaining = mb_substr($remaining, mb_strlen($nextSyllable));
         }
 
         return $elements;

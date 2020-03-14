@@ -10,10 +10,10 @@ class PinyinSentenceElementsTest extends TestCase
     /**
      * @dataProvider elementsProvider
      *
-     * @param string $sentence
-     * @param array  $expectedElements
+     * @param  string  $sentence
+     * @param  array  $expectedElements
      */
-    public function testElements(string $sentence, array $expectedElements)
+    public function testElements(string $sentence, array $expectedElements): void
     {
         // Given we have a pinyin sentence;
         $pinyinSentence = new PinyinSentence($sentence);
@@ -39,11 +39,12 @@ class PinyinSentenceElementsTest extends TestCase
                 (string) $expectedElement,
                 (string) ($elements[$i]),
                 sprintf(
-                    '#%d word of "%s" should be "%s", got "%s"',
+                    '#%d word of "%s" should be "%s", got "%s" ("%s")',
                     $i,
                     $sentence,
                     $expectedElement,
-                    $elements[$i]
+                    $elements[$i],
+                    implode('","', $elements)
                 )
             );
         }
@@ -56,6 +57,7 @@ class PinyinSentenceElementsTest extends TestCase
     {
         return [
             ['Wo3 yao4 qu4 Bei3jing1 le', ['Wo3', 'yao4', 'qu4', 'Bei3jing1', 'le']],
+            ['Wo3yao4qu4Bei3jing1le', ['Wo3yao4qu4', 'Bei3jing1le']],
         ];
     }
 }
