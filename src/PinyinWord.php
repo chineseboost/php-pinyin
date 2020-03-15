@@ -55,14 +55,15 @@ class PinyinWord implements Normalizing
             }
 
             $nextSyllablePos = mb_strpos($remaining, $nextSyllable);
-            if ($nextSyllablePos === 0) {
-                array_push($elements, new PinyinSyllable($nextSyllable));
-                $remaining = mb_substr($remaining, mb_strlen($nextSyllable));
-            } else {
+            if ($nextSyllablePos !== 0) {
                 $nonSyllable = mb_substr($remaining, 0, $nextSyllablePos);
                 array_push($elements, new NonPinyinString($nonSyllable));
                 $remaining = mb_substr($remaining, mb_strlen($nonSyllable));
+                continue;
             }
+
+            array_push($elements, new PinyinSyllable($nextSyllable));
+            $remaining = mb_substr($remaining, mb_strlen($nextSyllable));
         }
 
         return $elements;
