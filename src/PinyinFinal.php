@@ -23,6 +23,7 @@ class PinyinFinal
         'van',
         'ang',
         'un',
+        'ue',
         'üe',
         'ui',
         'ün',

@@ -10,8 +10,8 @@ class PinyinSentenceElementsTest extends TestCase
     /**
      * @dataProvider elementsProvider
      *
-     * @param string $sentence
-     * @param array  $expectedElements
+     * @param string   $sentence
+     * @param string[] $expectedElements
      */
     public function testElements(string $sentence, array $expectedElements): void
     {
@@ -61,7 +61,10 @@ class PinyinSentenceElementsTest extends TestCase
             ['Wǒ yào qù Běijīng le', ['Wǒ', 'yào', 'qù', 'Běijīng', 'le']],
             ['WǒyàoqùBěijīngle', ['Wǒyàoqù', 'Běijīngle']],
             ['Zhōngguó Rénmín Gònghéguó', ['Zhōngguó', 'Rénmín', 'Gònghéguó']],
-            ['1998nian2', ['1998', 'nian2']],
+            ['ZhōngguóRénmínGònghéguó', ['Zhōngguó', 'Rénmín', 'Gònghéguó']],
+            ['Zhong1guo2 Ren2min2 Gong4he2guo2', ['Zhong1guo2', 'Ren2min2', 'Gong4he2guo2']],
+            ['Zhong1guo2Ren2min2Gong4he2guo2', ['Zhong1guo2', 'Ren2min2', 'Gong4he2guo2']],
+            ['1998nian2', ['yī', 'jiǔ', 'jiǔ', 'bā', 'nián']],
             [
                 'Xué ér shí xí zhī, bù yì yuè hū?',
                 ['Xué', 'ér', 'shí', 'xí', 'zhī', ',', 'bù', 'yì', 'yuè', 'hū', '?'],

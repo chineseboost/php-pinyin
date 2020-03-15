@@ -13,7 +13,7 @@ class PinyinWordElementsTest extends TestCase
      * @param string   $word
      * @param string[] $expectedElements
      */
-    public function testElements(string $word, array $expectedElements)
+    public function testElements(string $word, array $expectedElements): void
     {
         // Given a pinyin word;
         $pinyinWord = new PinyinWord($word);
@@ -26,12 +26,12 @@ class PinyinWordElementsTest extends TestCase
             count($expectedElements),
             $elements,
             sprintf(
-                '"%s" should have %d elements ("%s"), got %d ("%s")',
+                "'%s' should have %d elements ('%s'), got %d ('%s')",
                 $word,
                 count($expectedElements),
-                implode('","', $expectedElements),
+                implode("','", $expectedElements),
                 count($elements),
-                implode('","', $elements)
+                implode("','", $elements)
             )
         );
         foreach ($expectedElements as $i => $expectedElement) {
@@ -39,7 +39,7 @@ class PinyinWordElementsTest extends TestCase
                 (string) $expectedElement,
                 (string) ($elements[$i]),
                 sprintf(
-                    '#%d syllable of "%s" should be "%s", got "%s"',
+                    "#%d syllable of '%s' should be '%s', got '%s'",
                     $i,
                     $word,
                     $expectedElement,
@@ -53,12 +53,12 @@ class PinyinWordElementsTest extends TestCase
     {
         return [
             ['Qing1dao3', ['Qing1', 'dao3']],
-            ['Bei3 jing1', ['Bei3', ' ', 'jing1']], // TODO: would be nice if it stripped the space here?
+            ['Bei3 jing1', ['Bei3', 'jing1']], // TODO: would be nice if it stripped the space here?
             ['erhua', ['er', 'hua']],
             ['daor', ['daor']],
             ['wēnxīn', ['wēn', 'xīn']],
-            ['Zhōngguó Rénmín Gònghéguó', ['Zhōng', 'guó', ' ', 'Rén', 'mín', ' ', 'Gòng', 'hé', 'guó']],
-            ['2020nian2', ['2020', 'nian2']],
+            ['Zhōngguó Rénmín Gònghéguó', ['Zhōng', 'guó', 'Rén', 'mín', 'Gòng', 'hé', 'guó']],
+            ['2020nian2', ['èr', 'líng', 'èr', 'líng', 'nián']],
             ['bu2dao4100', ['bu2', 'dao4', '100']],
         ];
     }

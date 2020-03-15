@@ -12,25 +12,72 @@ class PinyinSentence implements Normalizing
     /** @var int */
     private $wordLimit;
 
+    /** @var bool */
+    private $replaceYears;
+
     /**
      * @param string $sentence
      * @param int    $wordLimit
+     * @param bool   $replaceYears
      */
-    public function __construct(string $sentence, int $wordLimit = 1000)
-    {
+    public function __construct(
+        string $sentence,
+        int $wordLimit = 1000,
+        bool $replaceYears = true
+    ) {
         $this->sentence = $sentence;
         $this->wordLimit = $wordLimit;
+        $this->replaceYears = $replaceYears;
     }
 
     public function normalized(): Normalizing
     {
-        return new static(
-            preg_replace(
-                '/\s+/u',
-                ' ',
-                PinyinRegex::normalize($this->sentence)
+        $normalized = $this->sentence;
+        if ($this->replaceYears) {
+            $normalized = PinyinYear::replaceYears($normalized);
+        }
+        $normalized = preg_replace(
+            '/(\S)([A-Z])/u',
+            '$1 $2',
+            $normalized
+        );
+        $normalized = preg_replace(
+            '/\s+/u',
+            ' ',
+            $normalized
+        );
+
+        return new static($normalized);
+    }
+
+    /**
+     * @return PinyinWord[]
+     */
+    public function words(): array
+    {
+        return array_values(
+            array_filter(
+                $this->elements(),
+                static function (Normalizing $element): bool {
+                    return $element instanceof PinyinWord;
+                }
             )
         );
+    }
+
+    /**
+     * @return PinyinSyllable[]
+     */
+    public function syllables(): array
+    {
+        $syllables = [];
+        foreach ($this->words() as $word) {
+            foreach ($word->syllables() as $syllable) {
+                $syllables[] = $syllable;
+            }
+        }
+
+        return $syllables;
     }
 
     /**
@@ -40,7 +87,7 @@ class PinyinSentence implements Normalizing
     {
         $elements = [];
 
-        $naturalWords = preg_split('/\s+/u', $this->sentence);
+        $naturalWords = preg_split('/\s+/u', (string) $this->normalized());
         foreach ($naturalWords as $naturalWord) {
             $remaining = $naturalWord;
             $joinedWord = '';
