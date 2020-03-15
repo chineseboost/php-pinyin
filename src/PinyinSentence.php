@@ -46,6 +46,7 @@ class PinyinSentence implements Normalizing
             ' ',
             $normalized
         );
+
         return new static($normalized);
     }
 
@@ -75,6 +76,7 @@ class PinyinSentence implements Normalizing
                 $syllables[] = $syllable;
             }
         }
+
         return $syllables;
     }
 

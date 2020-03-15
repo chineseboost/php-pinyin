@@ -41,7 +41,7 @@ REGEXP;
         $normalized = preg_replace_callback(
             '/\d/u',
             static function ($subject): string {
-                return ' ' . static::DIGIT_TABLE[$subject[0]];
+                return ' '.static::DIGIT_TABLE[$subject[0]];
             },
             $normalized
         );

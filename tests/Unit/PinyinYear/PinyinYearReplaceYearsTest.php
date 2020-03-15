@@ -39,7 +39,7 @@ class PinyinYearReplaceYearsTest extends TestCase
     public function replaceYearsProvider(): array
     {
         return [
-            ['Tā shì 1980 nián chūshēng de.', 'Tā shì yī jiǔ bā líng nián chūshēng de.']
+            ['Tā shì 1980 nián chūshēng de.', 'Tā shì yī jiǔ bā líng nián chūshēng de.'],
         ];
     }
 }
