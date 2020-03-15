@@ -13,7 +13,7 @@ class PinyinWordSyllablesTest extends TestCase
      * @param string   $word
      * @param string[] $expectedSyllables
      */
-    public function testSyllables(string $word, array $expectedSyllables)
+    public function testSyllables(string $word, array $expectedSyllables): void
     {
         // Given a pinyin word;
         $pinyinWord = new PinyinWord($word);
@@ -26,12 +26,12 @@ class PinyinWordSyllablesTest extends TestCase
             count($expectedSyllables),
             $syllables,
             sprintf(
-                '"%s" should have %d syllables ("%s"), got %d ("%s")',
+                "'%s' should have %d syllables ('%s'), got %d ('%s')",
                 $word,
                 count($expectedSyllables),
-                implode('","', $expectedSyllables),
+                implode("', '", $expectedSyllables),
                 count($syllables),
-                implode('","', $syllables)
+                implode("', '", $syllables)
             )
         );
         foreach ($expectedSyllables as $i => $expectedSyllable) {
@@ -39,7 +39,7 @@ class PinyinWordSyllablesTest extends TestCase
                 (string) $expectedSyllable,
                 (string) ($syllables[$i]),
                 sprintf(
-                    '#%d syllable of "%s" should be "%s", got "%s"',
+                    "#%d syllable of '%s' should be '%s', got '%s'",
                     $i,
                     $word,
                     $expectedSyllable,
@@ -58,7 +58,8 @@ class PinyinWordSyllablesTest extends TestCase
             ['daor', ['daor']],
             ['wēnxīn', ['wēn', 'xīn']],
             ['Zhōngguó Rénmín Gònghéguó', ['Zhōng', 'guó', 'Rén', 'mín', 'Gòng', 'hé', 'guó']],
-            ['2020nian2', ['nian2']],
+            ['2020nian2', ['èr', 'líng', 'èr', 'líng', 'nián']],
+            ['Xué', ['Xué']],
         ];
     }
 }

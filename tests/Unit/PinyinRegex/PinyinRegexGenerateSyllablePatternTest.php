@@ -7,7 +7,7 @@ use Pinyin\PinyinRegex;
 
 class PinyinRegexGenerateSyllablePatternTest extends TestCase
 {
-    public function testGenerateSyllablePattern()
+    public function testGenerateSyllablePattern(): void
     {
         // When we generate the pinyin syllable regex pattern;
         $pattern = PinyinRegex::generateSyllablePattern();

@@ -7,7 +7,7 @@ use Pinyin\String\Normalizing;
 class PinyinWord implements Normalizing
 {
     /** @var string */
-    private $word;
+    protected $word;
 
     /** @var int */
     private $syllableLimit;
@@ -30,7 +30,7 @@ class PinyinWord implements Normalizing
         return array_values(
             array_filter(
                 $this->elements(),
-                function (Normalizing $stringable): bool {
+                static function (Normalizing $stringable): bool {
                     return $stringable instanceof PinyinSyllable;
                 }
             )
@@ -43,13 +43,14 @@ class PinyinWord implements Normalizing
     public function elements(): array
     {
         $elements = [];
-        $remaining = $this->word;
+        $remaining = preg_replace('/\s+/u', ' ', trim($this->word));
+        $remaining = PinyinYear::replaceYears($remaining);
 
-        for ($i = 0; mb_strlen($remaining) > 0 && $i < $this->syllableLimit; $i++) {
+        for ($i = 0; $remaining !== '' && $i < $this->syllableLimit; $i++) {
             $nextSyllable = PinyinRegex::extractFirstSyllable($remaining);
             if (!$nextSyllable) {
-                if (mb_strlen($remaining) > 0) {
-                    array_push($elements, new NonPinyinString($remaining));
+                if ($remaining !== '') {
+                    $elements[] = new NonPinyinString($remaining);
                 }
                 break;
             }
@@ -57,12 +58,14 @@ class PinyinWord implements Normalizing
             $nextSyllablePos = mb_strpos($remaining, $nextSyllable);
             if ($nextSyllablePos !== 0) {
                 $nonSyllable = mb_substr($remaining, 0, $nextSyllablePos);
-                array_push($elements, new NonPinyinString($nonSyllable));
+                if ($nonSyllable !== ' ') {
+                    $elements[] = new NonPinyinString($nonSyllable);
+                }
                 $remaining = mb_substr($remaining, mb_strlen($nonSyllable));
                 continue;
             }
 
-            array_push($elements, new PinyinSyllable($nextSyllable));
+            $elements[] = new PinyinSyllable($nextSyllable);
             $remaining = mb_substr($remaining, mb_strlen($nextSyllable));
         }
 
@@ -78,7 +81,7 @@ class PinyinWord implements Normalizing
                 implode(
                     '',
                     array_map(
-                        function (Normalizing $element) use ($toneMarked): string {
+                        static function (Normalizing $element) use ($toneMarked): string {
                             if ($toneMarked && $element instanceof PinyinSyllable) {
                                 return $element->toneMarked();
                             }
