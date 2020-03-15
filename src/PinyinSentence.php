@@ -13,8 +13,8 @@ class PinyinSentence implements Normalizing
     private $wordLimit;
 
     /**
-     * @param  string  $sentence
-     * @param  int  $wordLimit
+     * @param string $sentence
+     * @param int    $wordLimit
      */
     public function __construct(string $sentence, int $wordLimit = 1000)
     {
