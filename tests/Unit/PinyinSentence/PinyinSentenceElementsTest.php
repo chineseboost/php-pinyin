@@ -58,6 +58,22 @@ class PinyinSentenceElementsTest extends TestCase
         return [
             ['Wo3 yao4 qu4 Bei3jing1 le', ['Wo3', 'yao4', 'qu4', 'Bei3jing1', 'le']],
             ['Wo3yao4qu4Bei3jing1le', ['Wo3yao4qu4', 'Bei3jing1le']],
+            ['Wǒ yào qù Běijīng le', ['Wǒ', 'yào', 'qù', 'Běijīng', 'le']],
+            ['WǒyàoqùBěijīngle', ['Wǒyàoqù', 'Běijīngle']],
+            ['Zhōngguó Rénmín Gònghéguó', ['Zhōngguó', 'Rénmín', 'Gònghéguó']],
+            ['1998nian2', ['1998', 'nian2']],
+            [
+                'Xué ér shí xí zhī, bù yì yuè hū?',
+                ['Xué', 'ér', 'shí', 'xí', 'zhī', ',', 'bù', 'yì', 'yuè', 'hū', '?'],
+            ],
+            [
+                'Yǒu péng zì yuǎnfāng lái, bù yì lè hū?',
+                ['Yǒu', 'péng', 'zì', 'yuǎnfāng', 'lái', ',', 'bù', 'yì', 'lè', 'hū', '?'],
+            ],
+            [
+                'Yīxiē shìqíng wǒmen néng kòngzhì, lìng yīxiē zé bù néng.',
+                ['Yīxiē', 'shìqíng', 'wǒmen', 'néng', 'kòngzhì', ',', 'lìng', 'yīxiē', 'zé', 'bù', 'néng', '.'],
+            ],
         ];
     }
 }
