@@ -1,0 +1,11 @@
+preset: recommended
+risky: true
+finder:
+    exclude:
+        - modules
+        - node_modules
+        - storage
+        - vendor
+        - data
+    name: "*.php"
+    not-name: "*.blade.php"
