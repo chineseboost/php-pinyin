@@ -17,10 +17,10 @@ if (!is_file($wordFreqPath)) {
         $wordFreqPath
     );
 }
-    
+
 $commonWords = [];
 $wordFreqFile = fopen($wordFreqPath, 'rb');
-while (($freqRow = fgetcsv($wordFreqFile, 1000, '	')) !== FALSE) {
+while (($freqRow = fgetcsv($wordFreqFile, 1000, '	')) !== false) {
     if (mb_strlen($freqRow[0]) < 2) {
         continue;
     }
