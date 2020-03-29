@@ -39,10 +39,13 @@ $exportFiles = [];
 $seen = [];
 
 $forces = [
-    '要' => 'yao4',
-    '了' => 'le5',
-    '上' => 'shang4',
-    '落' => 'luo4',
+    '要'  => 'yao4',
+    '了'  => 'le5',
+    '上'  => 'shang4',
+    '落'  => 'luo4',
+    '得'  => 'de5',
+    '都'  => 'dou1',
+    '大夫' => 'Dai4fu5',
 ];
 
 while ($line = stream_get_line($ceDictFile, 1024 * 1024, "\n")) {
@@ -90,8 +93,10 @@ while ($line = stream_get_line($ceDictFile, 1024 * 1024, "\n")) {
 
     $lengthKey = sprintf('%02d', $hanziLength);
     if (!isset($exportFiles[$lengthKey])) {
-        $filePath =
-            implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'data', "{$lengthKey}_pinyin.data"]);
+        $filePath = implode(
+            DIRECTORY_SEPARATOR,
+            [__DIR__, '..', 'data', "{$lengthKey}_pinyin.data"]
+        );
         $exportFiles[$lengthKey] = fopen($filePath, 'wb');
         fwrite($exportFiles[$lengthKey], '<?php return [');
     }
@@ -105,8 +110,9 @@ while ($line = stream_get_line($ceDictFile, 1024 * 1024, "\n")) {
 
 printf("Wrote %d data files\n", count($exportFiles));
 
-$tweaks = [
+$basicTweaks = [
     '必须得' => 'bi4xu1 dei3',
+    '取得'  => 'qu3de2',
 ];
 $pronouns = [
     '我' => 'wo3',
@@ -117,10 +123,12 @@ $pronouns = [
     '它' => 'ta1',
     '牠' => 'ta1',
     '祂' => 'ta1',
+    '谁' => 'shei2',
+    '誰' => 'shei2',
 ];
 foreach ($pronouns as $pronoun => $pronounPinyin) {
-    $tweaks["{$pronoun}得"] = "{$pronounPinyin} dei3";
-    $tweaks["{$pronoun}们得"] = "{$pronounPinyin} dei3";
+    $basicTweaks["{$pronoun}得"] = "{$pronounPinyin} dei3";
+    $basicTweaks["{$pronoun}们得"] = "{$pronounPinyin} dei3";
 }
 
 $punctuation = [
@@ -156,15 +164,38 @@ $punctuation = [
     '～～' => '! ',
     '　'  => ' ',
 ];
-foreach (array_merge($tweaks, $punctuation) as $zhongWen => $pinyinConversion) {
+foreach (array_merge($basicTweaks, $punctuation) as $zhongWen => $pinyinConversion) {
     if ($zhongWen === $pinyinConversion) {
+        continue;
+    }
+    if (isset($seen[$zhongWen])) {
         continue;
     }
     $lengthKey = sprintf('%02d', mb_strlen($zhongWen));
     fwrite($exportFiles[$lengthKey], "'{$zhongWen}'=>'{$pinyinConversion}',");
 }
 
-foreach ($exportFiles as $exportFile) {
+$regexTweaks = [
+    sprintf(
+        '/(%s[们們]?)([把将])(.{1,20})落/u',
+        implode('|', array_keys($pronouns))
+    )                    => '$1$2$3 la4',
+    '/得([不得]?)到/u'       => 'de2$1dao4',
+    '/(.)\1{1}地/u'       => '$1$1 de5',
+    '/([么|麽].)地/u'       => '$1 de5',
+    '/([一|两|那|这|這|此].)地/u' => '$1 di4',
+];
+$tweaksFilePath = implode(
+    DIRECTORY_SEPARATOR,
+    [__DIR__, '..', 'data', 'tweaks_pinyin.data']
+);
+$tweaksFile = fopen($tweaksFilePath, 'wb');
+fwrite($tweaksFile, '<?php return [');
+foreach ($regexTweaks as $regex => $tweak) {
+    fwrite($tweaksFile, "'{$regex}'=>'{$tweak}',");
+}
+
+foreach (array_merge($exportFiles, [$tweaksFile]) as $exportFile) {
     fwrite($exportFile, '];');
     $fileName = stream_get_meta_data($exportFile)['uri'];
     $fileSize = filesize($fileName) / 1000;

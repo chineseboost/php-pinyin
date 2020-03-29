@@ -14,6 +14,12 @@ class FurthestForwardMatching implements HanziPinyinConversionStrategy
 
     public function convertHanziToPinyin(string $hanzi): PinyinSentence
     {
+        if (mb_strlen($hanzi) >= 3) {
+            foreach (self::conversionTable('tweaks') as $regex => $replacement) {
+                $hanzi = preg_replace($regex, $replacement, $hanzi);
+            }
+        }
+
         $pinyin = implode(
             ' ',
             array_map(
@@ -46,7 +52,7 @@ class FurthestForwardMatching implements HanziPinyinConversionStrategy
 
         while ($subject !== '') {
             for ($i = min(mb_strlen($subject), self::MAX_KEY_LENGTH); $i >= 1; $i--) {
-                $conversionTable = self::conversionTable($i);
+                $conversionTable = self::conversionTable(sprintf('%02d', $i));
                 if (empty($conversionTable)) {
                     continue;
                 }
@@ -68,13 +74,12 @@ class FurthestForwardMatching implements HanziPinyinConversionStrategy
     }
 
     /**
-     * @param int $hanziLength
+     * @param string $key
      *
      * @return array
      */
-    private static function conversionTable(int $hanziLength): array
+    private static function conversionTable(string $key): array
     {
-        $key = sprintf('%02d', $hanziLength);
         if (!isset(self::$conversionTables[$key])) {
             self::$conversionTables[$key] = self::loadConversionTable($key);
         }
