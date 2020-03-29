@@ -40,6 +40,9 @@ $seen = [];
 
 $forces = [
     '要' => 'yao4',
+    '了' => 'le5',
+    '上' => 'shang4',
+    '落' => 'luo4',
 ];
 
 while ($line = stream_get_line($ceDictFile, 1024 * 1024, "\n")) {
@@ -88,7 +91,7 @@ while ($line = stream_get_line($ceDictFile, 1024 * 1024, "\n")) {
     $lengthKey = sprintf('%02d', $hanziLength);
     if (!isset($exportFiles[$lengthKey])) {
         $filePath =
-            implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'data', "{$lengthKey}_pinyin.php"]);
+            implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'data', "{$lengthKey}_pinyin.data"]);
         $exportFiles[$lengthKey] = fopen($filePath, 'wb');
         fwrite($exportFiles[$lengthKey], '<?php return [');
     }

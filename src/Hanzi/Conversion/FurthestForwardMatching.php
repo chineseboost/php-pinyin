@@ -75,7 +75,7 @@ class FurthestForwardMatching implements HanziPinyinConversionStrategy
     {
         return implode(
             DIRECTORY_SEPARATOR,
-            [__DIR__, '..', '..', '..', 'data', "{$key}_pinyin.php"]
+            [__DIR__, '..', '..', '..', 'data', "{$key}_pinyin.data"]
         );
     }
 }
