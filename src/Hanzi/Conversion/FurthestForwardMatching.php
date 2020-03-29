@@ -41,6 +41,7 @@ class FurthestForwardMatching implements HanziPinyinConversionStrategy
         $pinyin = PinyinYear::replaceYears($pinyin);
         $firstChar = mb_strtoupper(mb_substr($pinyin, 0, 1));
         $rest = mb_substr($pinyin, 1);
+
         return new PinyinSentence("{$firstChar}{$rest}");
     }
 
