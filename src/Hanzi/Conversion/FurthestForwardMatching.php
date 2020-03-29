@@ -12,27 +12,20 @@ class FurthestForwardMatching implements HanziPinyinConversionStrategy
 
     public function convertHanziToPinyin(string $hanzi): PinyinSentence
     {
-        $pinyin = '';
-
-        while ($hanzi !== '') {
-            for ($i = mb_strlen($hanzi); $i >= 1; $i--) {
-                $conversionTable = self::conversionTable($i);
-                if (empty($conversionTable)) {
-                    continue;
-                }
-                $furthestForward = mb_substr($hanzi, 0, $i);
-                if (!isset($conversionTable[$furthestForward])) {
-                    if ($i === 1) {
-                        $pinyin .= mb_substr($hanzi, 0, 1);
-                        $hanzi = mb_substr($hanzi, 1);
-                    }
-                    continue;
-                }
-                $pinyin .= " {$conversionTable[$furthestForward]} ";
-                $hanzi = mb_substr($hanzi, $i);
-                break;
-            }
-        }
+        $pinyin = implode(
+            ' ',
+            array_map(
+                static function (string $section): string {
+                    return self::furthestForwardMatching($section);
+                },
+                preg_split(
+                    '/([^\p{Han}]+)/u',
+                    $hanzi,
+                    -1,
+                    PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY
+                )
+            )
+        );
 
         $pinyin = trim($pinyin);
         $pinyin = preg_replace('/\s+/u', ' ', $pinyin);
@@ -43,6 +36,33 @@ class FurthestForwardMatching implements HanziPinyinConversionStrategy
         $rest = mb_substr($pinyin, 1);
 
         return new PinyinSentence("{$firstChar}{$rest}");
+    }
+
+    private static function furthestForwardMatching(string $subject): string
+    {
+        $pinyin = '';
+
+        while ($subject !== '') {
+            for ($i = mb_strlen($subject); $i >= 1; $i--) {
+                $conversionTable = self::conversionTable($i);
+                if (empty($conversionTable)) {
+                    continue;
+                }
+                $furthestForward = mb_substr($subject, 0, $i);
+                if (!isset($conversionTable[$furthestForward])) {
+                    if ($i === 1) {
+                        $pinyin .= mb_substr($subject, 0, 1);
+                        $subject = mb_substr($subject, 1);
+                    }
+                    continue;
+                }
+                $pinyin .= " {$conversionTable[$furthestForward]} ";
+                $subject = mb_substr($subject, $i);
+                break;
+            }
+        }
+
+        return trim($pinyin);
     }
 
     /**
