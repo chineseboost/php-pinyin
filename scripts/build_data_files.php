@@ -20,12 +20,12 @@ if (!is_file($wordFreqPath)) {
 
 $commonWords = [];
 $wordFreqFile = fopen($wordFreqPath, 'rb');
-while (($freqRow = fgetcsv($wordFreqFile, 1000, '	')) !== FALSE) {
+while (($freqRow = fgetcsv($wordFreqFile, 1000, '	')) !== false) {
     if (mb_strlen($freqRow[0]) < 2) {
         continue;
     }
     $commonWords[$freqRow[0]] = true;
-    if (count($commonWords) >= 60000) {
+    if (count($commonWords) >= 200000) {
         break;
     }
 }
@@ -38,12 +38,16 @@ $ceDictFile = gzopen($ceDictPath, 'r');
 $exportFiles = [];
 $seen = [];
 
+$forces = [
+    '要' => 'yao4',
+];
+
 while ($line = stream_get_line($ceDictFile, 1024 * 1024, "\n")) {
     if (mb_strpos($line, '#') === 0) {
         continue;
     }
 
-    preg_match('/([\p{Han}]+) ([\p{Han}]+) \[([a-zA-Z0-9 ]+)]/u', $line, $matches);
+    preg_match('/([\p{Han}]+) ([\p{Han}]+) \[([a-zA-Z0-9: ]+)]/u', $line, $matches);
     if (count($matches) < 4) {
         continue;
     }
@@ -74,11 +78,17 @@ while ($line = stream_get_line($ceDictFile, 1024 * 1024, "\n")) {
     $seen[$fanti] = true;
     $seen[$jianti] = true;
 
-    $pinyin = preg_replace('/\s+([^A-Z])/u', '$1', $pinyin);
+    $pinyin = preg_replace('/u:/u', 'v', $pinyin);
+    $pinyin = $forces[$jianti] ?? $forces[$fanti] ?? preg_replace('/\s+([^A-Z])/u', '$1', $pinyin);
+
+    if ($hanziLength === 1) {
+        $pinyin = mb_strtolower($pinyin);
+    }
 
     $lengthKey = sprintf('%02d', $hanziLength);
     if (!isset($exportFiles[$lengthKey])) {
-        $filePath = __DIR__."/../data/{$lengthKey}_pinyin.php";
+        $filePath =
+            implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'data', "{$lengthKey}_pinyin.php"]);
         $exportFiles[$lengthKey] = fopen($filePath, 'wb');
         fwrite($exportFiles[$lengthKey], '<?php return [');
     }
@@ -86,11 +96,70 @@ while ($line = stream_get_line($ceDictFile, 1024 * 1024, "\n")) {
     fwrite($exportFiles[$lengthKey], "'{$fanti}'=>'{$pinyin}',");
 
     if ($jianti !== $fanti) {
-        fwrite($exportFiles[$lengthKey], "'{$jianti}'=>'{$pinyin}',");
+        fwrite($exportFiles[$lengthKey], "'{$jianti}' => '{$pinyin}',");
     }
 }
 
 printf("Wrote %d data files\n", count($exportFiles));
+
+$tweaks = [
+    '必须得' => 'bi4xu1 dei3',
+];
+$pronouns = [
+    '我' => 'wo3',
+    '你' => 'ni3',
+    '您' => 'nin2',
+    '他' => 'ta1',
+    '她' => 'ta1',
+    '它' => 'ta1',
+    '牠' => 'ta1',
+    '祂' => 'ta1',
+];
+foreach ($pronouns as $pronoun => $pronounPinyin) {
+    $tweaks["{$pronoun}得"] = "{$pronounPinyin} dei3";
+    $tweaks["{$pronoun}们得"] = "{$pronounPinyin} dei3";
+}
+
+$punctuation = [
+    '。'  => '. ',
+    '？'  => '? ',
+    '！'  => '! ',
+    '，'  => ', ',
+    '、'  => ', ',
+    '；'  => '; ',
+    '：'  => ': ',
+    '「'  => '“',
+    '」'  => '”',
+    '﹁'  => '“',
+    '﹂'  => '”',
+    '『'  => '“',
+    '』'  => '”',
+    '《'  => '“',
+    '》'  => '”',
+    '〈'  => '“',
+    '〉'  => '”',
+    '（'  => ' (',
+    '）'  => ') ',
+    '［'  => ' [',
+    '］'  => '] ',
+    '【'  => ' [',
+    '】'  => '] ',
+    '‧'  => ' ',
+    '…'  => ' ... ',
+    '……' => ' ... ',
+    '—'  => ' — ',
+    '——' => ' — ',
+    '～'  => ' — ',
+    '～～' => '! ',
+    '　'  => ' ',
+];
+foreach (array_merge($tweaks, $punctuation) as $zhongWen => $pinyinConversion) {
+    if ($zhongWen === $pinyinConversion) {
+        continue;
+    }
+    $lengthKey = sprintf('%02d', mb_strlen($zhongWen));
+    fwrite($exportFiles[$lengthKey], "'{$zhongWen}'=>'{$pinyinConversion}',");
+}
 
 foreach ($exportFiles as $exportFile) {
     fwrite($exportFile, '];');
