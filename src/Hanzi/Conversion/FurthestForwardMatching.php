@@ -7,6 +7,8 @@ use Pinyin\PinyinYear;
 
 class FurthestForwardMatching implements HanziPinyinConversionStrategy
 {
+    private const MAX_KEY_LENGTH = 13;
+
     /** @var array */
     private static $conversionTables = [];
 
@@ -43,7 +45,7 @@ class FurthestForwardMatching implements HanziPinyinConversionStrategy
         $pinyin = '';
 
         while ($subject !== '') {
-            for ($i = mb_strlen($subject); $i >= 1; $i--) {
+            for ($i = min(mb_strlen($subject), self::MAX_KEY_LENGTH); $i >= 1; $i--) {
                 $conversionTable = self::conversionTable($i);
                 if (empty($conversionTable)) {
                     continue;
