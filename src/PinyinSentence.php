@@ -30,6 +30,24 @@ class PinyinSentence implements Normalizing
         $this->replaceYears = $replaceYears;
     }
 
+    public function toneMarked(): self
+    {
+        return new static(
+            implode(
+                '',
+                array_map(
+                    static function (Normalizing $element): Normalizing {
+                        if ($element instanceof PinyinWord) {
+                            return $element->toneMarked();
+                        }
+                        return $element;
+                    },
+                    $this->elements()
+                )
+            )
+        );
+    }
+
     public function normalized(): Normalizing
     {
         $normalized = $this->sentence;
@@ -87,8 +105,17 @@ class PinyinSentence implements Normalizing
     {
         $elements = [];
 
-        $naturalWords = preg_split('/\s+/u', (string) $this->normalized());
+        $naturalWords = preg_split(
+            '/(\s+)/u',
+            (string) $this->normalized(),
+            -1,
+            PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE
+        );
         foreach ($naturalWords as $naturalWord) {
+            if (preg_match('/^\s+$/u', $naturalWord) === 1) {
+                $elements[] = new NonPinyinString(' ');
+                continue;
+            }
             $remaining = $naturalWord;
             $joinedWord = '';
             for ($i = 0; $remaining !== '' && $i < $this->wordLimit; $i++) {
