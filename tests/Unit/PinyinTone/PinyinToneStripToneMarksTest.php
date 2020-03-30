@@ -47,7 +47,7 @@ class PinyinToneStripToneMarksTest extends TestCase
             ['jiǔ', 'jiu'],
             ['shí', 'shi'],
             ['lǜsè', 'lüse'],
-            ['Zhōnghuá Rénmín Gònghéguó', 'Zhonghua Renmin Gongheguo']
+            ['Zhōnghuá Rénmín Gònghéguó', 'Zhonghua Renmin Gongheguo'],
         ];
     }
 }
