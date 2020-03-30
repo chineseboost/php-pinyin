@@ -90,10 +90,10 @@ class FurthestForwardMatchingTest extends TestCase
                 '猫（学名：Felis Catus或Felis silvestris catus），通常指家猫，为小型猫科动物。',
                 'Mao1 (xue2ming2: Felis Catus huo4 Felis silvestris catus), tong1chang2 zhi3 jia1 mao1, wei2 xiao3xing2 mao1 ke1 dong4wu4.',
             ],
-            //            [
-            //                '政府将在2015年对旅游行业加以规范。',
-            //                'Zheng4fu3 jiang1 zai4 er4 ling2 yi1 wu3 nian2 dui4 lv3you2 hang2ye4 jia1yi3 gui1fan4.'
-            //            ]
+            [
+                '政府将在2015年对旅游行业加以规范。',
+                'Zheng4fu3 jiang1 zai4 er4 ling2 yi1 wu3 nian2 dui4 lv3you2 hang2ye4 jia1yi3 gui1fan4.',
+            ],
         ];
     }
 }

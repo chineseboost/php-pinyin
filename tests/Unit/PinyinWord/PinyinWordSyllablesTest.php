@@ -58,7 +58,8 @@ class PinyinWordSyllablesTest extends TestCase
             ['daor', ['daor']],
             ['wēnxīn', ['wēn', 'xīn']],
             ['Zhōngguó Rénmín Gònghéguó', ['Zhōng', 'guó', 'Rén', 'mín', 'Gòng', 'hé', 'guó']],
-            ['2020nian2', ['èr', 'líng', 'èr', 'líng', 'nián']],
+            ['2020nián', ['èr', 'líng', 'èr', 'líng', 'nián']],
+            ['2020nian2', ['er4', 'ling2', 'er4', 'ling2', 'nian2']],
             ['Xué', ['Xué']],
         ];
     }

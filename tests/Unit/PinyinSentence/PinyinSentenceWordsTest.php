@@ -61,7 +61,7 @@ class PinyinSentenceWordsTest extends TestCase
             ['Wǒ yào qù Běijīng le', ['Wǒ', 'yào', 'qù', 'Běijīng', 'le']],
             ['WǒyàoqùBěijīngle', ['Wǒyàoqù', 'Běijīngle']],
             ['ZhōngguóRénmínGònghéguó', ['Zhōngguó', 'Rénmín', 'Gònghéguó']],
-            ['1998nian2', ['yī', 'jiǔ', 'jiǔ', 'bā', 'nián']],
+            ['1998nián', ['yī', 'jiǔ', 'jiǔ', 'bā', 'nián']],
             [
                 'Xué ér shí xí zhī, bù yì yuè hū?',
                 ['Xué', 'ér', 'shí', 'xí', 'zhī', 'bù', 'yì', 'yuè', 'hū'],

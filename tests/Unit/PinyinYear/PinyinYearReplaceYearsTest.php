@@ -40,6 +40,7 @@ class PinyinYearReplaceYearsTest extends TestCase
     {
         return [
             ['Tā shì 1980 nián chūshēng de.', 'Tā shì yī jiǔ bā líng nián chūshēng de.'],
+            ['Ta1 shi4 1980 nian2 chu1sheng1 de.', 'Ta1 shi4 yi1 jiu3 ba1 ling2 nian2 chu1sheng1 de.'],
         ];
     }
 }

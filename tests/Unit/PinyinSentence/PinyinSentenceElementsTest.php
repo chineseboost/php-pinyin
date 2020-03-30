@@ -73,7 +73,7 @@ class PinyinSentenceElementsTest extends TestCase
                 'Zhong1guo2Ren2min2Gong4he2guo2',
                 ['Zhong1guo2', ' ', 'Ren2min2', ' ', 'Gong4he2guo2'],
             ],
-            ['1998nian2', ['yī', ' ', 'jiǔ', ' ', 'jiǔ', ' ', 'bā', ' ', 'nián']],
+            ['1998nián', ['yī', ' ', 'jiǔ', ' ', 'jiǔ', ' ', 'bā', ' ', 'nián']],
             [
                 'Xué ér shí xí zhī, bù yì yuè hū?',
                 [
