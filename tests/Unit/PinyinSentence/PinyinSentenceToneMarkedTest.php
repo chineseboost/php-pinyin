@@ -35,7 +35,7 @@ class PinyinSentenceToneMarkedTest extends TestCase
             ['Ta1 zen3me hai2 mei2 xia4lai2 ne?', 'Tā zěnme hái méi xiàlái ne?'],
             [
                 'Cong2 bāshi2 lóu ke3yǐ kan4 dào zheng3gè cheng2shì, zan2men0 shang4qù kan4 yīxia4 ba5.',
-                'Cóng bāshí lóu kěyǐ kàn dào zhěnggè chéngshì, zánmen shàngqù kàn yīxià ba.'
+                'Cóng bāshí lóu kěyǐ kàn dào zhěnggè chéngshì, zánmen shàngqù kàn yīxià ba.',
             ],
         ];
     }

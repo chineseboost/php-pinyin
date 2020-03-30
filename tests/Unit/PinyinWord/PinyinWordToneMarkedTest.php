@@ -36,7 +36,7 @@ class PinyinWordToneMarkedTest extends TestCase
             ['Běijing1 Wàiguóyǔ Da4xué', 'Běijīng Wàiguóyǔ Dàxué'],
             ['zhong1hua2ren2min2gong4he2guo2', 'zhōnghuárénmíngònghéguó'],
             ['yi1 ge', 'yī ge'],
-            ['yi1dianr3', 'yīdiǎnr']
+            ['yi1dianr3', 'yīdiǎnr'],
         ];
     }
 }
