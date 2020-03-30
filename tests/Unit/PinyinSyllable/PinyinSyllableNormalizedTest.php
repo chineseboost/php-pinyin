@@ -13,7 +13,7 @@ class PinyinSyllableNormalizedTest extends TestCase
      * @param string $syllable
      * @param string $expectedNormalized
      */
-    public function testNormalized(string $syllable, string $expectedNormalized)
+    public function testNormalized(string $syllable, string $expectedNormalized): void
     {
         // Given we have a pinyin syllable;
         $pinyinSyllable = new PinyinSyllable($syllable);
@@ -50,6 +50,7 @@ class PinyinSyllableNormalizedTest extends TestCase
             ['lu', 'lu'],
             ['LV', 'Lü'],
             ['ü', 'yu'],
+            ['yi1', 'yi1'],
             ['Biang3', 'Biang3'],
             [" \nnian3  ", 'nian3'],
             [" \tkao6  ", 'kao'],

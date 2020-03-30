@@ -44,7 +44,7 @@ class PinyinSyllable implements Normalizing
      */
     public function toneMarked(): self
     {
-        return new self(PinyinTone::applyToneMark(
+        return new static(PinyinTone::applyToneMark(
             (string) $this->plain(),
             $this->tone()->number()
         ));
@@ -59,7 +59,7 @@ class PinyinSyllable implements Normalizing
         $plain = $this->plain();
         $toneNumber = $this->tone()->number();
 
-        return new self("${plain}${toneNumber}");
+        return new static("${plain}${toneNumber}");
     }
 
     public function normalized(): Normalizing
@@ -99,7 +99,7 @@ class PinyinSyllable implements Normalizing
     {
         mb_internal_encoding('UTF-8');
         $plain = (string) $this->normalized();
-        $plain = preg_replace('/[0-9]+/u', '', $plain);
+        $plain = preg_replace('/[0-5]+/u', '', $plain);
         $plain = PinyinTone::stripToneMarks($plain);
 
         return new static($plain);

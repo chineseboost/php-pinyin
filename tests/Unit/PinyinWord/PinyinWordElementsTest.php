@@ -53,12 +53,12 @@ class PinyinWordElementsTest extends TestCase
     {
         return [
             ['Qing1dao3', ['Qing1', 'dao3']],
-            ['Bei3 jing1', ['Bei3', 'jing1']], // TODO: would be nice if it stripped the space here?
+            ['Bei3 jing1', ['Bei3', ' ', 'jing1']],
             ['erhua', ['er', 'hua']],
             ['daor', ['daor']],
             ['wēnxīn', ['wēn', 'xīn']],
-            ['Zhōngguó Rénmín Gònghéguó', ['Zhōng', 'guó', 'Rén', 'mín', 'Gòng', 'hé', 'guó']],
-            ['2020nian2', ['èr', 'líng', 'èr', 'líng', 'nián']],
+            ['Zhōngguó Rénmín Gònghéguó', ['Zhōng', 'guó', ' ', 'Rén', 'mín', ' ', 'Gòng', 'hé', 'guó']],
+            ['2020nian2', ['èr', ' ', 'líng', ' ', 'èr', ' ','líng', ' ', 'nián']],
             ['bu2dao4100', ['bu2', 'dao4', '100']],
         ];
     }

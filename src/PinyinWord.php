@@ -22,6 +22,24 @@ class PinyinWord implements Normalizing
         $this->syllableLimit = $syllableLimit;
     }
 
+    public function toneMarked(): self
+    {
+        return new static(
+            implode(
+                '',
+                array_map(
+                    static function (Normalizing $element): Normalizing {
+                        if ($element instanceof PinyinSyllable) {
+                            return $element->toneMarked();
+                        }
+                        return $element;
+                    },
+                    $this->elements()
+                )
+            )
+        );
+    }
+
     /**
      * @return PinyinSyllable[]
      */
@@ -58,9 +76,7 @@ class PinyinWord implements Normalizing
             $nextSyllablePos = mb_strpos($remaining, $nextSyllable);
             if ($nextSyllablePos !== 0) {
                 $nonSyllable = mb_substr($remaining, 0, $nextSyllablePos);
-                if ($nonSyllable !== ' ') {
-                    $elements[] = new NonPinyinString($nonSyllable);
-                }
+                $elements[] = new NonPinyinString($nonSyllable);
                 $remaining = mb_substr($remaining, mb_strlen($nonSyllable));
                 continue;
             }
@@ -76,7 +92,7 @@ class PinyinWord implements Normalizing
     {
         $toneMarked = PinyinTone::isToneMarked($this->word);
 
-        return new self(
+        return new static(
             PinyinRegex::normalize(
                 implode(
                     '',

@@ -18,7 +18,7 @@ class PinyinToneApplyToneMarkTest extends TestCase
         string $input,
         int $toneNumber,
         string $expectedToneMarked
-    ) {
+    ): void {
         // Given an input string;
 
         // When we apply a tone mark to it;
@@ -59,6 +59,7 @@ class PinyinToneApplyToneMarkTest extends TestCase
             ['v', 1, 'v̄'],
             ['xiu', 2, 'xiú'],
             ['üan', 3, 'üǎn'],
+            ['yi', 1, 'yī'],
             ['', 3, ''],
         ];
     }

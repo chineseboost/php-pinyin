@@ -13,7 +13,7 @@ class PinyinSyllablePlainTest extends TestCase
      * @param string $syllable
      * @param string $expectedPlain
      */
-    public function testPlain(string $syllable, string $expectedPlain)
+    public function testPlain(string $syllable, string $expectedPlain): void
     {
         // Given we have a pinyin syllable;
         $pinyinSyllable = new PinyinSyllable($syllable);
@@ -45,6 +45,8 @@ class PinyinSyllablePlainTest extends TestCase
             [' a  ', 'a'],
             [' a1  ', 'a'],
             [' ā  ', 'a'],
+            ['yi1', 'yi'],
+            ['yī', 'yi'],
             [" \nnian3  ", 'nian'],
             [" \tkao6  ", 'kao'],
             [' zui0 ', 'zui'],
