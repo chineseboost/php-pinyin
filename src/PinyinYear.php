@@ -49,6 +49,7 @@ REGEXP;
             },
             $input
         );
+
         return preg_replace_callback(
             static::DECADE_PATTERN,
             static function ($subject): string {

@@ -40,6 +40,7 @@ class PinyinSentence implements Normalizing
                         if ($element instanceof PinyinWord) {
                             return $element->toneMarked();
                         }
+
                         return $element;
                     },
                     $this->elements()
