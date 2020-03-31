@@ -113,7 +113,7 @@ class PinyinSyllableToneMarkedTest extends TestCase
             ['Ǎi', 'Ǎi'],
             ['dianr3', 'diǎnr'],
             ['kuair4', 'kuàir'],
-            ['wanr2', 'wánr']
+            ['wanr2', 'wánr'],
         ];
     }
 }
