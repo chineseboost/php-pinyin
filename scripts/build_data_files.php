@@ -86,6 +86,7 @@ while ($line = stream_get_line($ceDictFile, 1024 * 1024, "\n")) {
 
     $pinyin = preg_replace('/u:/u', 'v', $pinyin);
     $pinyin = $forces[$jianti] ?? $forces[$fanti] ?? preg_replace('/\s+([^A-Z])/u', '$1', $pinyin);
+    $pinyin = preg_replace('/([0-5])r5/u', 'r$1', $pinyin);
 
     if ($hanziLength === 1) {
         $pinyin = mb_strtolower($pinyin);
@@ -179,10 +180,10 @@ $regexTweaks = [
     sprintf(
         '/(%s[们們]?)([把将])(.{1,20})落/u',
         implode('|', array_keys($pronouns))
-    )                    => '$1$2$3 la4',
-    '/得([不得]?)到/u'       => 'de2$1dao4',
-    '/(.)\1{1}地/u'       => '$1$1 de5',
-    '/([么|麽].)地/u'       => '$1 de5',
+    )                      => '$1$2$3 la4',
+    '/得([不得]?)到/u'         => 'de2$1dao4',
+    '/(.)\1{1}地/u'         => '$1$1 de5',
+    '/([么|麽].)地/u'         => '$1 de5',
     '/([一|两|那|这|這|此].)地/u' => '$1 di4',
 ];
 $tweaksFilePath = implode(

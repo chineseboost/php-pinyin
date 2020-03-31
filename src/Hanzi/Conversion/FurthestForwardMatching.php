@@ -64,6 +64,11 @@ class FurthestForwardMatching implements HanziPinyinConversionStrategy
                     }
                     continue;
                 }
+                if ($i === 1 && $pinyin && ($furthestForward === '儿' || $furthestForward === '兒')) {
+                    $pinyin = preg_replace('/([0-5]?)\s*$/u', 'r$1 ', $pinyin, 1);
+                    $subject = mb_substr($subject, 1);
+                    break;
+                }
                 $pinyin .= " {$conversionTable[$furthestForward]} ";
                 $subject = mb_substr($subject, $i);
                 break;
