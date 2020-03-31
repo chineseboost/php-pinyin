@@ -46,6 +46,8 @@ $forces = [
     '得'  => 'de5',
     '都'  => 'dou1',
     '大夫' => 'Dai4fu5',
+    '盖'  => 'gai4',
+    '趟'  => 'tang4',
 ];
 
 while ($line = stream_get_line($ceDictFile, 1024 * 1024, "\n")) {
@@ -86,7 +88,7 @@ while ($line = stream_get_line($ceDictFile, 1024 * 1024, "\n")) {
 
     $pinyin = preg_replace('/u:/u', 'v', $pinyin);
     $pinyin = $forces[$jianti] ?? $forces[$fanti] ?? preg_replace('/\s+([^A-Z])/u', '$1', $pinyin);
-    $pinyin = preg_replace('/([0-5])r5/u', 'r$1', $pinyin);
+    $pinyin = preg_replace('/([0-5])\s*r5/u', 'r$1', $pinyin);
 
     if ($hanziLength === 1) {
         $pinyin = mb_strtolower($pinyin);
