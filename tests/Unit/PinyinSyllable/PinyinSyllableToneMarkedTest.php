@@ -13,7 +13,7 @@ class PinyinSyllableToneMarkedTest extends TestCase
      * @param string $syllable
      * @param string $expectedToneMarked
      */
-    public function testToneMarked(string $syllable, string $expectedToneMarked)
+    public function testToneMarked(string $syllable, string $expectedToneMarked): void
     {
         // Given we have a pinyin syllable;
         $pinyinSyllable = new PinyinSyllable($syllable);
@@ -111,6 +111,9 @@ class PinyinSyllableToneMarkedTest extends TestCase
             ['Ǎ', 'Ǎ'],
             ['ǎi', 'ǎi'],
             ['Ǎi', 'Ǎi'],
+            ['dianr3', 'diǎnr'],
+            ['kuair4', 'kuàir'],
+            ['wanr2', 'wánr']
         ];
     }
 }
