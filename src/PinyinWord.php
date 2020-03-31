@@ -32,6 +32,7 @@ class PinyinWord implements Normalizing
                         if ($element instanceof PinyinSyllable) {
                             return $element->toneMarked();
                         }
+
                         return $element;
                     },
                     $this->elements()

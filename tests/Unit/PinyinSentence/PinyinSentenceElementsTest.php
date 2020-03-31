@@ -10,7 +10,7 @@ class PinyinSentenceElementsTest extends TestCase
     /**
      * @dataProvider elementsProvider
      *
-     * @param string $sentence
+     * @param string   $sentence
      * @param string[] $expectedElements
      */
     public function testElements(string $sentence, array $expectedElements): void
