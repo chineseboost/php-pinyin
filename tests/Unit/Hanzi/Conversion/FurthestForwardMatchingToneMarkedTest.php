@@ -59,7 +59,7 @@ class FurthestForwardMatchingToneMarkedTest extends TestCase
             ],
             [
                 '政府将在2015年对旅游行业加以规范。',
-                'Zhèngfǔ jiāng zài èr líng yī wǔ nián duì lǚyóu hángyè jiāyǐ guīfàn.'
+                'Zhèngfǔ jiāng zài èr líng yī wǔ nián duì lǚyóu hángyè jiāyǐ guīfàn.',
             ],
             [
                 '食品供给',
@@ -68,7 +68,7 @@ class FurthestForwardMatchingToneMarkedTest extends TestCase
             [
                 '我已经累得不得了了。',
                 'Wǒ yǐjīng léi de bùdéliǎo le.',
-            ]
+            ],
         ];
     }
 }
