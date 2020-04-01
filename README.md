@@ -6,3 +6,69 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Pinyin and hanzi tools in pure PHP | 纯PHP的汉语拼音和汉字工具
+
+## Usage
+
+Install via composer:
+
+```bash
+composer require chineseboost/php-pinyin
+```
+
+### Converting hanzi into pinyin
+
+You can convert hanzi strings into pinyin with a furthest-forward matching
+strategy.
+
+php-pinyin handles a lot of cases that other pinyin generation tools do not,
+including many 多音字, 儿化 and common mis-parsings.
+
+```php
+<?php
+
+use Pinyin\Hanzi\Conversion\FurthestForwardMatching;
+
+$converter = new FurthestForwardMatching();
+
+$converter->convertHanziToPinyin('科学家的工作就是对理论加以检验。')->toneMarked();
+// "Kēxuéjiā de gōngzuò jiùshì duì lǐlùn jiāyǐ jiǎnyàn."
+
+$converter->convertHanziToPinyin('他下了车，扑哧扑哧地穿过泥地去开门。')->toneMarked();
+// "Tā xià le chē, pū chī pū chī de chuānguò ní dì qù kāimén."
+
+$converter->convertHanziToPinyin('我兒子真的是一點兒生活常識都沒有！')->toneMarked();
+// "Wǒ érzi zhēn de shì yīdiǎnr shēnghuó chángshí dōu méiyǒu!"
+
+$converter->convertHanziToPinyin('食品供给')->toneMarked();
+// "Shípǐn gōngjǐ"
+
+$converter->convertHanziToPinyin('政府将在2015年对旅游行业加以规范。')->toneMarked();
+// "Zhèngfǔ jiāng zài èr líng yī wǔ nián duì lǚyóu hángyè jiāyǐ guīfàn."
+
+$converter->convertHanziToPinyin('我已经累得不得了了。')->toneMarked();
+// "Wǒ yǐjīng léi de bùdéliǎo le."
+```
+
+### Working with pinyin
+
+You can also work directly with pinyin strings, for example to convert from
+tone numbers to tone marks.
+
+It does not matter if the source string has a mix of tone numbers and tone
+marks, so this can also be used to normalise a pinyin string.
+
+```php
+<?php
+
+use Pinyin\PinyinSentence;
+
+$sentence = new PinyinSentence('Ta1 zen3me hai2 mei2 xia4lai2 ne?');
+$sentence->toneMarked();
+// "Tā zěnme hái méi xiàlái ne?"
+
+$sentence = new PinyinSentence(
+    'Cong2 bāshi2 lóu ke3yǐ kan4 dào zheng3gè cheng2shì, zan2men0 shang4qù kan4 yīxia4 ba5.'
+);
+$sentence->toneMarked();
+// "Cóng bāshí lóu kěyǐ kàn dào zhěnggè chéngshì, zánmen shàngqù kàn yīxià ba."
+```
