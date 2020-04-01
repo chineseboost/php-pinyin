@@ -67,7 +67,7 @@ class FurthestForwardMatchingToneMarkedTest extends TestCase
             ],
             [
                 '我已经累得不得了了。',
-                'Wǒ yǐjīng léi de bùdéliǎo le.',
+                'Wǒ yǐjīng lèi de bùdéliǎo le.',
             ],
         ];
     }
