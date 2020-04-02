@@ -50,6 +50,8 @@ $forces = [
     '趟'  => 'tang4',
     '地'  => 'di4',
     '累'  => 'lei4',
+    '吗'  => 'ma5',
+    '嗎'  => 'ma5',
 ];
 
 while ($line = stream_get_line($ceDictFile, 1024 * 1024, "\n")) {

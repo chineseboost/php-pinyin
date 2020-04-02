@@ -69,6 +69,10 @@ class FurthestForwardMatchingToneMarkedTest extends TestCase
                 '我已经累得不得了了。',
                 'Wǒ yǐjīng lèi de bùdéliǎo le.',
             ],
+            [
+                '你想吃苹果吗？',
+                'Nǐ xiǎng chī píngguǒ ma?',
+            ]
         ];
     }
 }
