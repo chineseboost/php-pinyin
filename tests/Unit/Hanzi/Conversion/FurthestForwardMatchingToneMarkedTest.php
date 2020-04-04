@@ -72,7 +72,11 @@ class FurthestForwardMatchingToneMarkedTest extends TestCase
             [
                 '你想吃苹果吗？',
                 'Nǐ xiǎng chī píngguǒ ma?',
-            ]
+            ],
+            [
+                '商业是联结生产同消费的桥梁。',
+                'Shāngyè shì liánjié shēngchǎn tóng xiāofèi de qiáoliáng.'
+            ],
         ];
     }
 }
