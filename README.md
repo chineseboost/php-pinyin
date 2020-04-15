@@ -7,6 +7,8 @@
 
 Pinyin and hanzi tools in pure PHP | 纯PHP的汉语拼音和汉字工具
 
+You can try a web version of this here: [https://www.chineseboost.com/tools/hanzi-pinyin-conversion](https://www.chineseboost.com/tools/hanzi-pinyin-conversion)
+
 ## Usage
 
 Install via composer:
