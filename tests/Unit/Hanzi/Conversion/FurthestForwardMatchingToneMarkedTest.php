@@ -75,7 +75,7 @@ class FurthestForwardMatchingToneMarkedTest extends TestCase
             ],
             [
                 '商业是联结生产同消费的桥梁。',
-                'Shāngyè shì liánjié shēngchǎn tóng xiāofèi de qiáoliáng.'
+                'Shāngyè shì liánjié shēngchǎn tóng xiāofèi de qiáoliáng.',
             ],
             [
                 '學而時習之，不亦說乎？',
