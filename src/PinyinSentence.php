@@ -2,9 +2,10 @@
 
 namespace Pinyin;
 
+use Pinyin\String\HtmlAble;
 use Pinyin\String\Normalizing;
 
-class PinyinSentence implements Normalizing
+class PinyinSentence implements Normalizing, HtmlAble
 {
     /** @var string */
     private $sentence;
@@ -180,6 +181,25 @@ class PinyinSentence implements Normalizing
         }
 
         return $elements;
+    }
+
+    public function asHtml(): string
+    {
+        $elementsHtml = implode(
+            ' ',
+            array_map(
+                static function (HtmlAble $element): string {
+                    return $element->asHtml();
+                },
+                $this->elements()
+            )
+        );
+
+        return trim(
+            <<<HTML
+<span class="pinyin pinyin-sentence" lang="zh-Latn-CN-pinyin">{$elementsHtml}</span>
+HTML
+        );
     }
 
     public function __toString(): string
