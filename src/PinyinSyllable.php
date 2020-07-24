@@ -2,9 +2,10 @@
 
 namespace Pinyin;
 
+use Pinyin\String\HtmlAble;
 use Pinyin\String\Normalizing;
 
-class PinyinSyllable implements Normalizing
+class PinyinSyllable implements Normalizing, HtmlAble
 {
     /**
      * @var string
@@ -108,6 +109,16 @@ class PinyinSyllable implements Normalizing
     public function isToneMarked(): bool
     {
         return PinyinTone::isToneMarked($this->syllable);
+    }
+
+    public function asHtml(): string
+    {
+        return trim(
+            <<<HTML
+<span class="pinyin pinyin-syllable pinyin-tone-{$this->tone()->number()}"
+lang="zh-Latn-CN-pinyin">{$this->toneMarked()}</span>
+HTML
+        );
     }
 
     /**

@@ -2,9 +2,10 @@
 
 namespace Pinyin;
 
+use Pinyin\String\HtmlAble;
 use Pinyin\String\Normalizing;
 
-class PinyinWord implements Normalizing
+class PinyinWord implements Normalizing, HtmlAble
 {
     /** @var string */
     protected $word;
@@ -109,6 +110,24 @@ class PinyinWord implements Normalizing
                     )
                 )
             )
+        );
+    }
+
+    public function asHtml(): string
+    {
+        $elementsHtml = implode(
+            '',
+            array_map(
+                static function (HtmlAble $element): string {
+                    return $element->asHtml();
+                },
+                $this->elements()
+            )
+        );
+        return trim(
+            <<<HTML
+<span class="pinyin pinyin-word" lang="zh-Latn-CN-pinyin">{$elementsHtml}</span>
+HTML
         );
     }
 
