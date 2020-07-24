@@ -40,7 +40,7 @@ lang="zh-Latn-CN-pinyin">xíng</span></span> <span class="non-pinyin">,</span> <
 lang="zh-Latn-CN-pinyin">bì</span></span> <span class="non-pinyin"> </span> <span class="pinyin pinyin-word" lang="zh-Latn-CN-pinyin"><span class="pinyin pinyin-syllable pinyin-tone-3"
 lang="zh-Latn-CN-pinyin">yǒu</span></span> <span class="non-pinyin"> </span> <span class="pinyin pinyin-word" lang="zh-Latn-CN-pinyin"><span class="pinyin pinyin-syllable pinyin-tone-3"
 lang="zh-Latn-CN-pinyin">wǒ</span></span> <span class="non-pinyin"> </span> <span class="pinyin pinyin-word" lang="zh-Latn-CN-pinyin"><span class="pinyin pinyin-syllable pinyin-tone-1"
-lang="zh-Latn-CN-pinyin">shī</span></span> <span class="non-pinyin">.</span></span>'
+lang="zh-Latn-CN-pinyin">shī</span></span> <span class="non-pinyin">.</span></span>',
             ],
             [
                 'Wǒ míngtiān chūfā.',
@@ -49,7 +49,7 @@ lang="zh-Latn-CN-pinyin">Wǒ</span></span> <span class="non-pinyin"> </span> <sp
 lang="zh-Latn-CN-pinyin">míng</span><span class="pinyin pinyin-syllable pinyin-tone-1"
 lang="zh-Latn-CN-pinyin">tiān</span></span> <span class="non-pinyin"> </span> <span class="pinyin pinyin-word" lang="zh-Latn-CN-pinyin"><span class="pinyin pinyin-syllable pinyin-tone-1"
 lang="zh-Latn-CN-pinyin">chū</span><span class="pinyin pinyin-syllable pinyin-tone-1"
-lang="zh-Latn-CN-pinyin">fā</span></span> <span class="non-pinyin">.</span></span>'
+lang="zh-Latn-CN-pinyin">fā</span></span> <span class="non-pinyin">.</span></span>',
             ],
         ];
     }

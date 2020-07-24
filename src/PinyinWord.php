@@ -124,6 +124,7 @@ class PinyinWord implements Normalizing, HtmlAble
                 $this->elements()
             )
         );
+
         return trim(
             <<<HTML
 <span class="pinyin pinyin-word" lang="zh-Latn-CN-pinyin">{$elementsHtml}</span>

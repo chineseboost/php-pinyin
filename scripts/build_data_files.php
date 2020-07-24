@@ -197,7 +197,7 @@ $regexTweaks = [
     '/(.{1,2})\1{1}地/u'         => '$1$1 de5',
     '/([么|麽].)地/u'              => '$1 de5',
     '/([一|两|那|这|這|此].)地/u'      => '$1 di4',
-    '/不([\p{Han}]{1,4})地/u' => 'bu4 $1 de5',
+    '/不([\p{Han}]{1,4})地/u'     => 'bu4 $1 de5',
 ];
 $tweaksFilePath = implode(
     DIRECTORY_SEPARATOR,

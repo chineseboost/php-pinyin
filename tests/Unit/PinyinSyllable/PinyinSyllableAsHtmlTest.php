@@ -34,22 +34,22 @@ class PinyinSyllableAsHtmlTest extends TestCase
             [
                 'qiān',
                 '<span class="pinyin pinyin-syllable pinyin-tone-1"
-lang="zh-Latn-CN-pinyin">qiān</span>'
+lang="zh-Latn-CN-pinyin">qiān</span>',
             ],
             [
                 'chá',
                 '<span class="pinyin pinyin-syllable pinyin-tone-2"
-lang="zh-Latn-CN-pinyin">chá</span>'
+lang="zh-Latn-CN-pinyin">chá</span>',
             ],
             [
                 'gǔn',
                 '<span class="pinyin pinyin-syllable pinyin-tone-3"
-lang="zh-Latn-CN-pinyin">gǔn</span>'
+lang="zh-Latn-CN-pinyin">gǔn</span>',
             ],
             [
                 'mà',
                 '<span class="pinyin pinyin-syllable pinyin-tone-4"
-lang="zh-Latn-CN-pinyin">mà</span>'
+lang="zh-Latn-CN-pinyin">mà</span>',
             ],
             [
                 'me',
