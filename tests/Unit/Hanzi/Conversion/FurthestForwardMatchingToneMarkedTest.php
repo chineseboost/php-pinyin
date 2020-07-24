@@ -79,12 +79,12 @@ class FurthestForwardMatchingToneMarkedTest extends TestCase
             ],
             [
                 '學而時習之，不亦說乎？',
-                'Xué ér shí xí zhī, bù yì yuè hū?'
+                'Xué ér shí xí zhī, bù yì yuè hū?',
             ],
             [
                 '父母和亲戚都会不停地催促我结婚。',
-                'Fùmǔ hé qīnqi dōu huì bù tíng de cuīcù wǒ jiéhūn.'
-            ]
+                'Fùmǔ hé qīnqi dōu huì bù tíng de cuīcù wǒ jiéhūn.',
+            ],
         ];
     }
 }

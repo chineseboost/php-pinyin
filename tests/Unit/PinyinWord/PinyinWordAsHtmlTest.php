@@ -35,19 +35,19 @@ class PinyinWordAsHtmlTest extends TestCase
                 'Běijīng',
                 '<span class="pinyin pinyin-word" lang="zh-Latn-CN-pinyin"><span class="pinyin pinyin-syllable pinyin-tone-3"
 lang="zh-Latn-CN-pinyin">Běi</span><span class="pinyin pinyin-syllable pinyin-tone-1"
-lang="zh-Latn-CN-pinyin">jīng</span></span>'
+lang="zh-Latn-CN-pinyin">jīng</span></span>',
             ],
             [
                 'hànzì',
                 '<span class="pinyin pinyin-word" lang="zh-Latn-CN-pinyin"><span class="pinyin pinyin-syllable pinyin-tone-4"
 lang="zh-Latn-CN-pinyin">hàn</span><span class="pinyin pinyin-syllable pinyin-tone-4"
-lang="zh-Latn-CN-pinyin">zì</span></span>'
+lang="zh-Latn-CN-pinyin">zì</span></span>',
             ],
             [
                 'jiāsù',
                 '<span class="pinyin pinyin-word" lang="zh-Latn-CN-pinyin"><span class="pinyin pinyin-syllable pinyin-tone-1"
 lang="zh-Latn-CN-pinyin">jiā</span><span class="pinyin pinyin-syllable pinyin-tone-4"
-lang="zh-Latn-CN-pinyin">sù</span></span>'
+lang="zh-Latn-CN-pinyin">sù</span></span>',
             ],
         ];
     }

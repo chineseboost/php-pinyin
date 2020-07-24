@@ -194,6 +194,7 @@ class PinyinSentence implements Normalizing, HtmlAble
                 $this->elements()
             )
         );
+
         return trim(
             <<<HTML
 <span class="pinyin pinyin-sentence" lang="zh-Latn-CN-pinyin">{$elementsHtml}</span>
