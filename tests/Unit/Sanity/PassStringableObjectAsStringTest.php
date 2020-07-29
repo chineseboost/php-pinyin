@@ -9,7 +9,7 @@ class PassStringableObjectAsStringTest extends TestCase
     public function testPassStringableObjectAsString(): void
     {
         // Given a stringable object;
-        $stringable = new class {
+        $stringable = new class() {
             public function __toString()
             {
                 return 'foobar';
@@ -20,6 +20,7 @@ class PassStringableObjectAsStringTest extends TestCase
         $stringTaker = new class($stringable) {
             /** @var string */
             public $content;
+
             public function __construct(string $content)
             {
                 $this->content = $content;

@@ -47,6 +47,7 @@ class HanziSentence implements Stringable
         if (!$this->pinyin) {
             $this->pinyin = $this->converter->convertHanziToPinyin($this->sentence);
         }
+
         return $this->pinyin;
     }
 
@@ -79,6 +80,7 @@ class HanziSentence implements Stringable
                 continue;
             }
         }
+
         return $elements;
     }
 
