@@ -3,8 +3,9 @@
 namespace Pinyin\Hanzi;
 
 use InvalidArgumentException;
+use Pinyin\String\Stringable;
 
-class Hanzi
+class Hanzi implements Stringable
 {
     /**
      * @var string
@@ -14,7 +15,7 @@ class Hanzi
     /**
      * @param string $hanzi
      */
-    public function __construct($hanzi)
+    public function __construct(string $hanzi)
     {
         mb_internal_encoding('UTF-8');
         if (mb_strlen($hanzi) !== 1) {
@@ -25,7 +26,7 @@ class Hanzi
         $this->hanzi = $hanzi;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->hanzi;
     }
