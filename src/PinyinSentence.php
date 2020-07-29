@@ -186,7 +186,7 @@ class PinyinSentence implements Normalizing, HtmlAble
     public function asHtml(): string
     {
         $elementsHtml = implode(
-            ' ',
+            '',
             array_map(
                 static function (HtmlAble $element): string {
                     return $element->asHtml();

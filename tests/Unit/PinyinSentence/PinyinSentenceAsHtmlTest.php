@@ -34,22 +34,22 @@ class PinyinSentenceAsHtmlTest extends TestCase
             [
                 'Sān rén xíng, bì yǒu wǒ shī.',
                 '<span class="pinyin pinyin-sentence" lang="zh-Latn-CN-pinyin"><span class="pinyin pinyin-word" lang="zh-Latn-CN-pinyin"><span class="pinyin pinyin-syllable pinyin-tone-1"
-lang="zh-Latn-CN-pinyin">Sān</span></span> <span class="non-pinyin"> </span> <span class="pinyin pinyin-word" lang="zh-Latn-CN-pinyin"><span class="pinyin pinyin-syllable pinyin-tone-2"
-lang="zh-Latn-CN-pinyin">rén</span></span> <span class="non-pinyin"> </span> <span class="pinyin pinyin-word" lang="zh-Latn-CN-pinyin"><span class="pinyin pinyin-syllable pinyin-tone-2"
-lang="zh-Latn-CN-pinyin">xíng</span></span> <span class="non-pinyin">,</span> <span class="non-pinyin"> </span> <span class="pinyin pinyin-word" lang="zh-Latn-CN-pinyin"><span class="pinyin pinyin-syllable pinyin-tone-4"
-lang="zh-Latn-CN-pinyin">bì</span></span> <span class="non-pinyin"> </span> <span class="pinyin pinyin-word" lang="zh-Latn-CN-pinyin"><span class="pinyin pinyin-syllable pinyin-tone-3"
-lang="zh-Latn-CN-pinyin">yǒu</span></span> <span class="non-pinyin"> </span> <span class="pinyin pinyin-word" lang="zh-Latn-CN-pinyin"><span class="pinyin pinyin-syllable pinyin-tone-3"
-lang="zh-Latn-CN-pinyin">wǒ</span></span> <span class="non-pinyin"> </span> <span class="pinyin pinyin-word" lang="zh-Latn-CN-pinyin"><span class="pinyin pinyin-syllable pinyin-tone-1"
-lang="zh-Latn-CN-pinyin">shī</span></span> <span class="non-pinyin">.</span></span>',
+lang="zh-Latn-CN-pinyin">Sān</span></span><span class="non-pinyin"> </span><span class="pinyin pinyin-word" lang="zh-Latn-CN-pinyin"><span class="pinyin pinyin-syllable pinyin-tone-2"
+lang="zh-Latn-CN-pinyin">rén</span></span><span class="non-pinyin"> </span><span class="pinyin pinyin-word" lang="zh-Latn-CN-pinyin"><span class="pinyin pinyin-syllable pinyin-tone-2"
+lang="zh-Latn-CN-pinyin">xíng</span></span><span class="non-pinyin">,</span><span class="non-pinyin"> </span><span class="pinyin pinyin-word" lang="zh-Latn-CN-pinyin"><span class="pinyin pinyin-syllable pinyin-tone-4"
+lang="zh-Latn-CN-pinyin">bì</span></span><span class="non-pinyin"> </span><span class="pinyin pinyin-word" lang="zh-Latn-CN-pinyin"><span class="pinyin pinyin-syllable pinyin-tone-3"
+lang="zh-Latn-CN-pinyin">yǒu</span></span><span class="non-pinyin"> </span><span class="pinyin pinyin-word" lang="zh-Latn-CN-pinyin"><span class="pinyin pinyin-syllable pinyin-tone-3"
+lang="zh-Latn-CN-pinyin">wǒ</span></span><span class="non-pinyin"> </span><span class="pinyin pinyin-word" lang="zh-Latn-CN-pinyin"><span class="pinyin pinyin-syllable pinyin-tone-1"
+lang="zh-Latn-CN-pinyin">shī</span></span><span class="non-pinyin">.</span></span>',
             ],
             [
                 'Wǒ míngtiān chūfā.',
                 '<span class="pinyin pinyin-sentence" lang="zh-Latn-CN-pinyin"><span class="pinyin pinyin-word" lang="zh-Latn-CN-pinyin"><span class="pinyin pinyin-syllable pinyin-tone-3"
-lang="zh-Latn-CN-pinyin">Wǒ</span></span> <span class="non-pinyin"> </span> <span class="pinyin pinyin-word" lang="zh-Latn-CN-pinyin"><span class="pinyin pinyin-syllable pinyin-tone-2"
+lang="zh-Latn-CN-pinyin">Wǒ</span></span><span class="non-pinyin"> </span><span class="pinyin pinyin-word" lang="zh-Latn-CN-pinyin"><span class="pinyin pinyin-syllable pinyin-tone-2"
 lang="zh-Latn-CN-pinyin">míng</span><span class="pinyin pinyin-syllable pinyin-tone-1"
-lang="zh-Latn-CN-pinyin">tiān</span></span> <span class="non-pinyin"> </span> <span class="pinyin pinyin-word" lang="zh-Latn-CN-pinyin"><span class="pinyin pinyin-syllable pinyin-tone-1"
+lang="zh-Latn-CN-pinyin">tiān</span></span><span class="non-pinyin"> </span><span class="pinyin pinyin-word" lang="zh-Latn-CN-pinyin"><span class="pinyin pinyin-syllable pinyin-tone-1"
 lang="zh-Latn-CN-pinyin">chū</span><span class="pinyin pinyin-syllable pinyin-tone-1"
-lang="zh-Latn-CN-pinyin">fā</span></span> <span class="non-pinyin">.</span></span>',
+lang="zh-Latn-CN-pinyin">fā</span></span><span class="non-pinyin">.</span></span>',
             ],
         ];
     }
