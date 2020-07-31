@@ -28,27 +28,26 @@ including many 多音字, 儿化 and common mis-parsings.
 ```php
 <?php
 
-use Pinyin\Hanzi\Conversion\FurthestForwardMatching;
+use Pinyin\Hanzi\HanziSentence;
 
-$converter = new FurthestForwardMatching();
-
-$converter->convertHanziToPinyin('科学家的工作就是对理论加以检验。')->toneMarked();
+(new HanziSentence('科学家的工作就是对理论加以检验。'))->asPinyin()->toneMarked();
 // "Kēxuéjiā de gōngzuò jiùshì duì lǐlùn jiāyǐ jiǎnyàn."
 
-$converter->convertHanziToPinyin('他下了车，扑哧扑哧地穿过泥地去开门。')->toneMarked();
+(new HanziSentence('他下了车，扑哧扑哧地穿过泥地去开门。'))->asPinyin()->toneMarked();
 // "Tā xià le chē, pū chī pū chī de chuānguò ní dì qù kāimén."
 
-$converter->convertHanziToPinyin('我兒子真的是一點兒生活常識都沒有！')->toneMarked();
+(new HanziSentence('我兒子真的是一點兒生活常識都沒有！'))->asPinyin()->toneMarked();
 // "Wǒ érzi zhēn de shì yīdiǎnr shēnghuó chángshí dōu méiyǒu!"
 
-$converter->convertHanziToPinyin('食品供给')->toneMarked();
+(new HanziSentence('食品供给'))->asPinyin()->toneMarked();
 // "Shípǐn gōngjǐ"
 
-$converter->convertHanziToPinyin('政府将在2015年对旅游行业加以规范。')->toneMarked();
+(new HanziSentence('政府将在2015年对旅游行业加以规范。'))->asPinyin()->toneMarked();
 // "Zhèngfǔ jiāng zài èr líng yī wǔ nián duì lǚyóu hángyè jiāyǐ guīfàn."
 
-$converter->convertHanziToPinyin('我已经累得不得了了。')->toneMarked();
+(new HanziSentence('我已经累得不得了了。'))->asPinyin()->toneMarked();
 // "Wǒ yǐjīng lèi de bùdéliǎo le."
+
 ```
 
 ### Working with pinyin
