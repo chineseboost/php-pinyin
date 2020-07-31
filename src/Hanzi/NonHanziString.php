@@ -20,7 +20,8 @@ class NonHanziString implements Stringable, HtmlAble
 
     public function asHtml(): string
     {
-        return trim(<<<HTML
+        return trim(
+            <<<HTML
 <span class="non-hanzi">{$this->string}</span>
 HTML
         );
