@@ -2,14 +2,17 @@
 
 namespace Pinyin\Hanzi;
 
+use Normalizer;
 use Pinyin\Hanzi\Conversion\FurthestForwardMatching;
 use Pinyin\Hanzi\Conversion\HanziPinyinConversionStrategy;
 use Pinyin\NonPinyinString;
 use Pinyin\PinyinSentence;
 use Pinyin\PinyinWord;
+use Pinyin\String\Normalizing;
+use Pinyin\String\PinyinAble;
 use Pinyin\String\Stringable;
 
-class HanziSentence implements Stringable
+class HanziSentence implements Normalizing, PinyinAble
 {
     /** @var string */
     private $sentence;
@@ -42,7 +45,7 @@ class HanziSentence implements Stringable
         $this->converter = $converter;
     }
 
-    public function asPinyin(): PinyinSentence
+    public function asPinyin(): Stringable
     {
         if (!$this->pinyin) {
             $this->pinyin = $this->converter->convertHanziToPinyin($this->sentence);
@@ -52,17 +55,18 @@ class HanziSentence implements Stringable
     }
 
     /**
-     * @return Stringable[]
+     * @return Normalizing[]
      */
     public function elements(): array
     {
         $elements = [];
         $pos = 0;
+        $sentence = (string) $this->normalized();
         foreach ($this->asPinyin()->elements() as $pinyinElement) {
             if ($pinyinElement instanceof PinyinWord) {
                 $charCount = count($pinyinElement->syllables());
                 $elements[] = new HanziWord(
-                    mb_substr($this->sentence, $pos, $charCount),
+                    mb_substr($sentence, $pos, $charCount),
                     $pinyinElement->normalized(),
                     $this->converter
                 );
@@ -73,7 +77,7 @@ class HanziSentence implements Stringable
                 if (trim($pinyinElement)) {
                     $charCount = mb_strlen($pinyinElement);
                     $elements[] = new NonHanziString(
-                        mb_substr($this->sentence, $pos, $charCount)
+                        mb_substr($sentence, $pos, $charCount)
                     );
                     $pos += $charCount;
                 }
@@ -82,6 +86,12 @@ class HanziSentence implements Stringable
         }
 
         return $elements;
+    }
+
+    public function normalized(): Normalizing
+    {
+        mb_internal_encoding('UTF-8');
+        return new self(Normalizer::normalize(trim($this->sentence)));
     }
 
     public function __toString(): string
