@@ -71,6 +71,7 @@ class HanziSyllable implements Normalizing, PinyinAble
     public function normalized(): Normalizing
     {
         mb_internal_encoding('UTF-8');
+
         return new self(Normalizer::normalize(trim($this->syllable)));
     }
 
