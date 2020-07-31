@@ -127,6 +127,7 @@ HTML
         if (preg_match('/r[0-5]?$/i', $this->syllable)) {
             return 2;
         }
+
         return 1;
     }
 

@@ -52,6 +52,7 @@ class HanziWord implements Normalizing, PinyinAble
                 (string) $this->converter->convertHanziToPinyin($this->word)
             );
         }
+
         return $this->pinyin;
     }
 
@@ -84,12 +85,14 @@ class HanziWord implements Normalizing, PinyinAble
                 continue;
             }
         }
+
         return $elements;
     }
 
     public function normalized(): Normalizing
     {
         mb_internal_encoding('UTF-8');
+
         return new self(Normalizer::normalize(trim($this->word)));
     }
 
