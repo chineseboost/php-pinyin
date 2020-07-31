@@ -7,11 +7,13 @@ use Normalizer;
 use Pinyin\Hanzi\Conversion\FurthestForwardMatching;
 use Pinyin\Hanzi\Conversion\HanziPinyinConversionStrategy;
 use Pinyin\PinyinSyllable;
+use Pinyin\PinyinTone;
+use Pinyin\String\HtmlAble;
 use Pinyin\String\Normalizing;
 use Pinyin\String\PinyinAble;
 use Pinyin\String\Stringable;
 
-class HanziSyllable implements Normalizing, PinyinAble
+class HanziSyllable implements Normalizing, PinyinAble, HtmlAble
 {
     /** @var string */
     private $syllable;
@@ -63,8 +65,23 @@ class HanziSyllable implements Normalizing, PinyinAble
         $this->converter = $converter;
     }
 
+    public function tone(): PinyinTone
+    {
+        return $this->asPinyin()->tone();
+    }
+
+    /**
+     * @return PinyinSyllable
+     */
     public function asPinyin(): Stringable
     {
+        if (!$this->pinyin) {
+            $this->pinyin = new PinyinSyllable(
+                mb_strtolower(
+                    $this->converter->convertHanziToPinyin($this->syllable)
+                )
+            );
+        }
         return $this->pinyin;
     }
 
@@ -73,6 +90,17 @@ class HanziSyllable implements Normalizing, PinyinAble
         mb_internal_encoding('UTF-8');
 
         return new self(Normalizer::normalize(trim($this->syllable)));
+    }
+
+    public function asHtml(string $lang = 'zh'): string
+    {
+        return trim(
+            <<<HTML
+<span class="hanzi syllable tone-{$this->tone()->number()}"
+data-pinyin="{$this->asPinyin()->toneMarked()}"
+lang="{$lang}">{$this->normalized()}</span>
+HTML
+        );
     }
 
     public function __toString(): string
