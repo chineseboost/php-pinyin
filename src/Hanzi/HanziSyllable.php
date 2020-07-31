@@ -82,6 +82,7 @@ class HanziSyllable implements Normalizing, PinyinAble, HtmlAble
                 )
             );
         }
+
         return $this->pinyin;
     }
 
