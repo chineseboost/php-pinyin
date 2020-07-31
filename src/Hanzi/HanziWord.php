@@ -2,12 +2,17 @@
 
 namespace Pinyin\Hanzi;
 
+use Normalizer;
 use Pinyin\Hanzi\Conversion\FurthestForwardMatching;
 use Pinyin\Hanzi\Conversion\HanziPinyinConversionStrategy;
+use Pinyin\NonPinyinString;
+use Pinyin\PinyinSyllable;
 use Pinyin\PinyinWord;
+use Pinyin\String\Normalizing;
+use Pinyin\String\PinyinAble;
 use Pinyin\String\Stringable;
 
-class HanziWord implements Stringable
+class HanziWord implements Normalizing, PinyinAble
 {
     /** @var string */
     private $word;
@@ -40,9 +45,55 @@ class HanziWord implements Stringable
         $this->converter = $converter;
     }
 
-    public function asPinyin(): PinyinWord
+    public function asPinyin(): Stringable
     {
+        if (!$this->pinyin) {
+            $this->pinyin = new PinyinWord(
+                (string) $this->converter->convertHanziToPinyin($this->word)
+            );
+        }
+
         return $this->pinyin;
+    }
+
+    /**
+     * @return Normalizing[]
+     */
+    public function elements(): array
+    {
+        $elements = [];
+        $pos = 0;
+        $word = (string) $this->normalized();
+        foreach ($this->asPinyin()->elements() as $pinyinElement) {
+            if ($pinyinElement instanceof PinyinSyllable) {
+                $elements[] = new HanziSyllable(
+                    mb_substr($word, $pos, $pinyinElement->hanziCount()),
+                    $pinyinElement,
+                    $this->converter
+                );
+                $pos += $pinyinElement->hanziCount();
+                continue;
+            }
+            if ($pinyinElement instanceof NonPinyinString) {
+                if (trim($pinyinElement)) {
+                    $charCount = mb_strlen($pinyinElement);
+                    $elements[] = new NonHanziString(
+                        mb_substr($word, $pos, $charCount)
+                    );
+                    $pos += $charCount;
+                }
+                continue;
+            }
+        }
+
+        return $elements;
+    }
+
+    public function normalized(): Normalizing
+    {
+        mb_internal_encoding('UTF-8');
+
+        return new self(Normalizer::normalize(trim($this->word)));
     }
 
     public function __toString(): string

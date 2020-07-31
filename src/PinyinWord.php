@@ -4,8 +4,9 @@ namespace Pinyin;
 
 use Pinyin\String\HtmlAble;
 use Pinyin\String\Normalizing;
+use Pinyin\String\Stringable;
 
-class PinyinWord implements Normalizing, HtmlAble
+class PinyinWord implements Stringable, Normalizing, HtmlAble
 {
     /** @var string */
     protected $word;

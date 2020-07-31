@@ -4,8 +4,9 @@ namespace Pinyin;
 
 use Pinyin\String\HtmlAble;
 use Pinyin\String\Normalizing;
+use Pinyin\String\Stringable;
 
-class PinyinSyllable implements Normalizing, HtmlAble
+class PinyinSyllable implements Stringable, Normalizing, HtmlAble
 {
     /**
      * @var string
@@ -78,7 +79,7 @@ class PinyinSyllable implements Normalizing, HtmlAble
                 sprintf(
                     '%s%s',
                     mb_strtoupper($firstLetter),
-                    mb_strtolower(mb_substr($syllable, 1, mb_strlen($syllable) - 1))
+                    mb_strtolower(mb_substr($syllable, 1))
                 );
         } else {
             $syllable = mb_strtolower($syllable);
@@ -119,6 +120,15 @@ class PinyinSyllable implements Normalizing, HtmlAble
 lang="zh-Latn-CN-pinyin">{$this->toneMarked()}</span>
 HTML
         );
+    }
+
+    public function hanziCount(): int
+    {
+        if (preg_match('/r[0-5]?$/i', $this->syllable)) {
+            return 2;
+        }
+
+        return 1;
     }
 
     /**
