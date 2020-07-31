@@ -116,7 +116,7 @@ class PinyinSyllable implements Stringable, Normalizing, HtmlAble
     {
         return trim(
             <<<HTML
-<span class="pinyin pinyin-syllable pinyin-tone-{$this->tone()->number()}"
+<span class="pinyin syllable tone-{$this->tone()->number()}"
 lang="zh-Latn-CN-pinyin">{$this->toneMarked()}</span>
 HTML
         );

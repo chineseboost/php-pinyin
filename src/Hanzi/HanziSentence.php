@@ -8,11 +8,12 @@ use Pinyin\Hanzi\Conversion\HanziPinyinConversionStrategy;
 use Pinyin\NonPinyinString;
 use Pinyin\PinyinSentence;
 use Pinyin\PinyinWord;
+use Pinyin\String\HtmlAble;
 use Pinyin\String\Normalizing;
 use Pinyin\String\PinyinAble;
 use Pinyin\String\Stringable;
 
-class HanziSentence implements Normalizing, PinyinAble
+class HanziSentence implements Normalizing, PinyinAble, HtmlAble
 {
     /** @var string */
     private $sentence;
@@ -86,6 +87,25 @@ class HanziSentence implements Normalizing, PinyinAble
         }
 
         return $elements;
+    }
+
+    public function asHtml(string $lang = 'zh'): string
+    {
+        $elementsHtml = implode(
+            '',
+            array_map(
+                static function (HtmlAble $element): string {
+                    return $element->asHtml();
+                },
+                $this->elements()
+            )
+        );
+
+        return trim(
+            <<<HTML
+<span class="hanzi sentence" lang="{$lang}">{$elementsHtml}</span>
+HTML
+        );
     }
 
     public function normalized(): Normalizing

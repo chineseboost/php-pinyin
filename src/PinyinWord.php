@@ -128,7 +128,7 @@ class PinyinWord implements Stringable, Normalizing, HtmlAble
 
         return trim(
             <<<HTML
-<span class="pinyin pinyin-word" lang="zh-Latn-CN-pinyin">{$elementsHtml}</span>
+<span class="pinyin word" lang="zh-Latn-CN-pinyin">{$elementsHtml}</span>
 HTML
         );
     }
