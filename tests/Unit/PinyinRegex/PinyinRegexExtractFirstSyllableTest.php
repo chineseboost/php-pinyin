@@ -56,6 +56,8 @@ class PinyinRegexExtractFirstSyllableTest extends TestCase
             ['zhèngzhuàn', 'zhèng'],
             ["Xī'ān", 'Xī'],
             ['xue', 'xue'],
+            ['sùróngkāfēi', 'sù'],
+            ['Tángrén Jiē', 'Táng'],
         ];
     }
 }

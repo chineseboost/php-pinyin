@@ -5,18 +5,22 @@ namespace Pinyin\Tests\Unit\Hanzi\HanziSentence;
 use PHPUnit\Framework\TestCase;
 use Pinyin\Hanzi\HanziSentence;
 
-class HanziSentenceElementsTest extends TestCase
+class HanziSentenceElementsPreMadePinyinTest extends TestCase
 {
     /**
-     * @dataProvider elementsProvider
+     * @dataProvider asHtmlPreMadePinyinProvider
      *
      * @param string $sentence
+     * @param string $pinyin
      * @param array  $expectedElements
      */
-    public function testElements(string $sentence, array $expectedElements): void
-    {
-        // Given we have a hanzi sentence;
-        $hanziSentence = new HanziSentence($sentence);
+    public function testAsHtmlPreMadePinyin(
+        string $sentence,
+        string $pinyin,
+        array $expectedElements
+    ): void {
+        // Given we have a hanzi sentence with pre-made pinyin;
+        $hanziSentence = new HanziSentence($sentence, $pinyin);
 
         // When we get its component elements;
         $elements = $hanziSentence->elements();
@@ -53,28 +57,18 @@ class HanziSentenceElementsTest extends TestCase
     /**
      * @return array[]
      */
-    public function elementsProvider(): array
+    public function asHtmlPreMadePinyinProvider(): array
     {
         return [
             [
-                '',
-                [],
-            ],
-            [
-                '我要去北京了。',
-                ['我', '要', '去', '北京', '了', '。'],
-            ],
-            [
-                '我不要去北京，我要去上海。',
-                ['我', '不要', '去', '北京', '，', '我', '要', '去', '上海', '。'],
+                '如果你喝速溶咖啡，就不需要咖啡壶了。',
+                'Rúguǒ nǐ hē sùróngkāfēi, jiù bù xūyào kāfēihú le.',
+                ['如果', '你', '喝', '速溶咖啡', '，', '就', '不', '需要', '咖啡壶', '了', '。'],
             ],
             [
                 '当年的商业发展为当今的唐人街奠定了基础。',
+                'Dāngnián de shāngyè fāzhǎn wéi dāngjīn de Tángrén Jiē diàndìng le jīchǔ.',
                 ['当年', '的', '商业', '发展', '为', '当今', '的', '唐人', '街', '奠定', '了', '基础', '。'],
-            ],
-            [
-                '如果你喝速溶咖啡，就不需要咖啡壶了。',
-                ['如果', '你', '喝', '速溶', '咖啡', '，', '就', '不', '需要', '咖啡', '壶', '了', '。'],
             ],
         ];
     }
