@@ -12,7 +12,7 @@ class HanziSentenceElementsPreMadePinyinTest extends TestCase
      *
      * @param string $sentence
      * @param string $pinyin
-     * @param array $expectedElements
+     * @param array  $expectedElements
      */
     public function testAsHtmlPreMadePinyin(
         string $sentence,
@@ -63,12 +63,12 @@ class HanziSentenceElementsPreMadePinyinTest extends TestCase
             [
                 '如果你喝速溶咖啡，就不需要咖啡壶了。',
                 'Rúguǒ nǐ hē sùróngkāfēi, jiù bù xūyào kāfēihú le.',
-                ['如果','你','喝','速溶咖啡','，','就','不','需要','咖啡壶','了','。'],
+                ['如果', '你', '喝', '速溶咖啡', '，', '就', '不', '需要', '咖啡壶', '了', '。'],
             ],
             [
                 '当年的商业发展为当今的唐人街奠定了基础。',
                 'Dāngnián de shāngyè fāzhǎn wéi dāngjīn de Tángrén Jiē diàndìng le jīchǔ.',
-                ['当年','的','商业','发展','为','当今','的','唐人','街','奠定','了','基础','。'],
+                ['当年', '的', '商业', '发展', '为', '当今', '的', '唐人', '街', '奠定', '了', '基础', '。'],
             ],
         ];
     }
