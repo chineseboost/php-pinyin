@@ -87,8 +87,8 @@ class FurthestForwardMatchingToneMarkedTest extends TestCase
             ],
             [
                 '她头一碰枕头就睡着了。',
-                'Tā tóu yī pèng zhěntou jiù shuìzháo le.'
-            ]
+                'Tā tóu yī pèng zhěntou jiù shuìzháo le.',
+            ],
         ];
     }
 }
