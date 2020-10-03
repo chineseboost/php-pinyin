@@ -121,11 +121,12 @@ printf("Wrote %d data files\n", count($exportFiles));
 
 $basicTweaks = [
     '必须得' => 'bi4xu1 dei3',
-    '取得'  => 'qu3de2',
-    '说乎'  => 'yue4 hu1',
-    '說乎'  => 'yue4 hu1',
-    '亦说'  => 'yi4 yue4',
-    '亦說'  => 'yi4 yue4',
+    '取得'   => 'qu3de2',
+    '说乎'   => 'yue4 hu1',
+    '說乎'   => 'yue4 hu1',
+    '亦说'   => 'yi4 yue4',
+    '亦說'   => 'yi4 yue4',
+    '睡着'   => 'shui4zhao2'
 ];
 $pronouns = [
     '我' => 'wo3',
