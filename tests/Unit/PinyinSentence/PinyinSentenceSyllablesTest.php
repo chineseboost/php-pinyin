@@ -34,16 +34,16 @@ class PinyinSentenceSyllablesTest extends TestCase
                 implode("','", $syllables)
             )
         );
-        foreach ($expectedSyllables as $i => $expectedSyllable) {
+        foreach ($expectedSyllables as $idx => $expectedSyllable) {
             self::assertSame(
                 (string) $expectedSyllable,
-                (string) ($syllables[$i]),
+                (string) ($syllables[$idx]),
                 sprintf(
                     "#%d syllable of '%s' should be '%s', got '%s' ('%s')",
-                    $i,
+                    $idx,
                     $sentence,
                     $expectedSyllable,
-                    $syllables[$i],
+                    $syllables[$idx],
                     implode("','", $syllables)
                 )
             );

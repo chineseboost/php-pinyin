@@ -67,7 +67,7 @@ class PinyinWord implements Stringable, Normalizing, HtmlAble
         $remaining = preg_replace('/\s+/u', ' ', trim($this->word));
         $remaining = PinyinYear::replaceYears($remaining);
 
-        for ($i = 0; $remaining !== '' && $i < $this->syllableLimit; $i++) {
+        for ($syl = 0; $remaining !== '' && $syl < $this->syllableLimit; $syl++) {
             $nextSyllable = PinyinRegex::extractFirstSyllable($remaining);
             if (!$nextSyllable) {
                 if ($remaining !== '') {

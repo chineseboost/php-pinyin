@@ -51,26 +51,26 @@ class FurthestForwardMatching implements HanziPinyinConversionStrategy
         $pinyin = '';
 
         while ($subject !== '') {
-            for ($i = min(mb_strlen($subject), self::MAX_KEY_LENGTH); $i >= 1; $i--) {
-                $conversionTable = self::conversionTable(sprintf('%02d', $i));
+            for ($pos = min(mb_strlen($subject), self::MAX_KEY_LENGTH); $pos >= 1; $pos--) {
+                $conversionTable = self::conversionTable(sprintf('%02d', $pos));
                 if (empty($conversionTable)) {
                     continue;
                 }
-                $furthestForward = mb_substr($subject, 0, $i);
+                $furthestForward = mb_substr($subject, 0, $pos);
                 if (!isset($conversionTable[$furthestForward])) {
-                    if ($i === 1) {
+                    if ($pos === 1) {
                         $pinyin .= mb_substr($subject, 0, 1);
                         $subject = mb_substr($subject, 1);
                     }
                     continue;
                 }
-                if ($i === 1 && $pinyin && ($furthestForward === '儿' || $furthestForward === '兒')) {
+                if ($pos === 1 && $pinyin && ($furthestForward === '儿' || $furthestForward === '兒')) {
                     $pinyin = preg_replace('/([0-5]?)\s*$/u', 'r$1 ', $pinyin, 1);
                     $subject = mb_substr($subject, 1);
                     break;
                 }
                 $pinyin .= " {$conversionTable[$furthestForward]} ";
-                $subject = mb_substr($subject, $i);
+                $subject = mb_substr($subject, $pos);
                 break;
             }
         }

@@ -34,16 +34,16 @@ class PinyinWordSyllablesTest extends TestCase
                 implode("', '", $syllables)
             )
         );
-        foreach ($expectedSyllables as $i => $expectedSyllable) {
+        foreach ($expectedSyllables as $idx => $expectedSyllable) {
             self::assertSame(
                 (string) $expectedSyllable,
-                (string) ($syllables[$i]),
+                (string) ($syllables[$idx]),
                 sprintf(
                     "#%d syllable of '%s' should be '%s', got '%s'",
-                    $i,
+                    $idx,
                     $word,
                     $expectedSyllable,
-                    $syllables[$i]
+                    $syllables[$idx]
                 )
             );
         }

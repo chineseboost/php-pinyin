@@ -34,16 +34,16 @@ class PinyinWordElementsTest extends TestCase
                 implode("','", $elements)
             )
         );
-        foreach ($expectedElements as $i => $expectedElement) {
+        foreach ($expectedElements as $idx => $expectedElement) {
             self::assertSame(
                 (string) $expectedElement,
-                (string) ($elements[$i]),
+                (string) ($elements[$idx]),
                 sprintf(
                     "#%d syllable of '%s' should be '%s', got '%s'",
-                    $i,
+                    $idx,
                     $word,
                     $expectedElement,
-                    $elements[$i]
+                    $elements[$idx]
                 )
             );
         }

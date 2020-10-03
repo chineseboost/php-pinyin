@@ -85,6 +85,10 @@ class FurthestForwardMatchingToneMarkedTest extends TestCase
                 '父母和亲戚都会不停地催促我结婚。',
                 'Fùmǔ hé qīnqi dōu huì bù tíng de cuīcù wǒ jiéhūn.',
             ],
+            [
+                '她头一碰枕头就睡着了。',
+                'Tā tóu yī pèng zhěntou jiù shuìzháo le.',
+            ],
         ];
     }
 }

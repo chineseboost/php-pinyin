@@ -38,16 +38,16 @@ class HanziSentenceElementsPreMadePinyinTest extends TestCase
                 implode("','", $elements)
             )
         );
-        foreach ($expectedElements as $i => $expectedElement) {
+        foreach ($expectedElements as $idx => $expectedElement) {
             self::assertSame(
                 (string) $expectedElement,
-                (string) ($elements[$i]),
+                (string) ($elements[$idx]),
                 sprintf(
                     '#%d word of "%s" should be "%s", got "%s" ("%s")',
-                    $i,
+                    $idx,
                     $sentence,
                     $expectedElement,
-                    $elements[$i],
+                    $elements[$idx],
                     implode('","', $elements)
                 )
             );
