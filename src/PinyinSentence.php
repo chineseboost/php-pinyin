@@ -121,7 +121,7 @@ class PinyinSentence implements Stringable, HtmlAble, Normalizing
             }
             $remaining = $naturalWord;
             $joinedWord = '';
-            for ($i = 0; $remaining !== '' && $i < $this->wordLimit; $i++) {
+            for ($word = 0; $remaining !== '' && $word < $this->wordLimit; $word++) {
                 $nextSyllable = PinyinRegex::extractFirstSyllable($remaining);
 
                 if ($nextSyllable === $naturalWord) {

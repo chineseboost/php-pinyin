@@ -34,16 +34,16 @@ class PinyinSentenceWordsTest extends TestCase
                 implode('","', $words)
             )
         );
-        foreach ($expectedWords as $i => $expectedWord) {
+        foreach ($expectedWords as $idx => $expectedWord) {
             self::assertSame(
                 (string) $expectedWord,
-                (string) ($words[$i]),
+                (string) ($words[$idx]),
                 sprintf(
                     '#%d word of "%s" should be "%s", got "%s" ("%s")',
-                    $i,
+                    $idx,
                     $sentence,
                     $expectedWord,
-                    $words[$i],
+                    $words[$idx],
                     implode('","', $words)
                 )
             );
