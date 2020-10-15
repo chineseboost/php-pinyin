@@ -89,6 +89,10 @@ class FurthestForwardMatchingToneMarkedTest extends TestCase
                 '她头一碰枕头就睡着了。',
                 'Tā tóu yī pèng zhěntou jiù shuìzháo le.',
             ],
+            [
+                '費了一番口舌才使他回心轉意。',
+                'Fèi le yī fān kǒushé cái shǐ tā huí xīn zhuǎn yì.'
+            ]
         ];
     }
 }
