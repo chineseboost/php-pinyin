@@ -91,8 +91,8 @@ class FurthestForwardMatchingToneMarkedTest extends TestCase
             ],
             [
                 '費了一番口舌才使他回心轉意。',
-                'Fèi le yī fān kǒushé cái shǐ tā huí xīn zhuǎn yì.'
-            ]
+                'Fèi le yī fān kǒushé cái shǐ tā huí xīn zhuǎn yì.',
+            ],
         ];
     }
 }
