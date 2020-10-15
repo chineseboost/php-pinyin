@@ -54,6 +54,8 @@ $forces = [
     '嗎'  => 'ma5',
     '同'  => 'tong2',
     '都会' => 'dou1 hui4',
+    '番'  => 'fān',
+    '轉'  => 'zhuǎn',
 ];
 
 while ($line = stream_get_line($ceDictFile, 1024 * 1024, "\n")) {
@@ -120,13 +122,13 @@ while ($line = stream_get_line($ceDictFile, 1024 * 1024, "\n")) {
 printf("Wrote %d data files\n", count($exportFiles));
 
 $basicTweaks = [
-    '必须得'  => 'bi4xu1 dei3',
-    '取得'   => 'qu3de2',
-    '说乎'   => 'yue4 hu1',
-    '說乎'   => 'yue4 hu1',
-    '亦说'   => 'yi4 yue4',
-    '亦說'   => 'yi4 yue4',
-    '睡着'   => 'shui4zhao2',
+    '必须得' => 'bi4xu1 dei3',
+    '取得'  => 'qu3de2',
+    '说乎'  => 'yue4 hu1',
+    '說乎'  => 'yue4 hu1',
+    '亦说'  => 'yi4 yue4',
+    '亦說'  => 'yi4 yue4',
+    '睡着'  => 'shui4zhao2',
 ];
 $pronouns = [
     '我' => 'wo3',
@@ -193,12 +195,12 @@ $regexTweaks = [
     sprintf(
         '/(%s[们們]?)([把将])(.{1,20})落/u',
         implode('|', array_keys($pronouns))
-    )                           => '$1$2$3 la4',
-    '/得([不得]?)到/u'              => 'de2$1dao4',
-    '/(.{1,2})\1{1}地/u'         => '$1$1 de5',
-    '/([么|麽].)地/u'              => '$1 de5',
-    '/([一|两|那|这|這|此].)地/u'      => '$1 di4',
-    '/不([\p{Han}]{1,4})地/u'     => 'bu4 $1 de5',
+    )                       => '$1$2$3 la4',
+    '/得([不得]?)到/u'          => 'de2$1dao4',
+    '/(.{1,2})\1{1}地/u'     => '$1$1 de5',
+    '/([么|麽].)地/u'          => '$1 de5',
+    '/([一|两|那|这|這|此].)地/u'  => '$1 di4',
+    '/不([\p{Han}]{1,4})地/u' => 'bu4 $1 de5',
 ];
 $tweaksFilePath = implode(
     DIRECTORY_SEPARATOR,
