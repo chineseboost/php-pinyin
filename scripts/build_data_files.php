@@ -54,8 +54,9 @@ $forces = [
     '嗎'  => 'ma5',
     '同'  => 'tong2',
     '都会' => 'dou1 hui4',
-    '番'  => 'fān',
-    '轉'  => 'zhuǎn',
+    '番'  => 'fan1',
+    '轉'  => 'zhuan3',
+    '打' => 'da3'
 ];
 
 while ($line = stream_get_line($ceDictFile, 1024 * 1024, "\n")) {
