@@ -70,9 +70,7 @@ class PinyinWord implements Stringable, Normalizing, HtmlAble
         for ($syl = 0; $remaining !== '' && $syl < $this->syllableLimit; $syl++) {
             $nextSyllable = PinyinRegex::extractFirstSyllable($remaining);
             if (!$nextSyllable) {
-                if ($remaining !== '') {
-                    $elements[] = new NonPinyinString($remaining);
-                }
+                $elements[] = new NonPinyinString($remaining);
                 break;
             }
 
