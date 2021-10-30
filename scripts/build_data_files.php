@@ -143,6 +143,7 @@ $basicTweaks = [
     '亦说'  => 'yi4 yue4',
     '亦說'  => 'yi4 yue4',
     '睡着'  => 'shui4zhao2',
+    '还要'  => 'hai2yao4',
 ];
 $pronouns = [
     '我' => 'wo3',
