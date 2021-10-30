@@ -128,6 +128,7 @@ class FurthestForwardMatchingTest extends TestCase
             ['母亲安抚着她在哭的婴儿', "Mu3qin1 an1fu3 zhe5 ta1 zai4 ku1 de5 ying1'er2"],
             ['一个人藏，十个人找。', 'Yi1 ge5 ren2 cang2, shi2 ge5 ren2 zhao3.'],
             ['他这么快地把工作做完', 'Ta1 zhe4me5 kuai4 de5 ba3 gong1zuo4 zuo4 wan2'],
+            ['“还要咖啡吗？”“不了，谢谢。”', '“Hai2yao4 ka1fei1 ma5?” “Bu4le5, xie4xie5.”'],
             [
                 '科学家的工作就是对理论加以检验。',
                 'Ke1xue2jia1 de5 gong1zuo4 jiu4shi4 dui4 li3lun4 jia1yi3 jian3yan4.',

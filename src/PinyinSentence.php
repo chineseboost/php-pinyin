@@ -198,7 +198,7 @@ class PinyinSentence implements Stringable, HtmlAble, Normalizing
 
         return trim(
             <<<HTML
-<span class="pinyin sentence" lang="zh-Latn-CN-pinyin">{$elementsHtml}</span>
+<span class="pinyin sentence" lang="zh-Latn-CN-pinyin">$elementsHtml</span>
 HTML
         );
     }

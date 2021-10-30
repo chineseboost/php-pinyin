@@ -39,6 +39,17 @@ class FurthestForwardMatching implements HanziPinyinConversionStrategy
         $pinyin = preg_replace('/\s+/u', ' ', $pinyin);
         $pinyin = preg_replace('/\s([,!?.:)])/u', '$1', $pinyin);
         $pinyin = preg_replace('/([(])\s/u', '$1', $pinyin);
+        $pinyin = preg_replace('/(["\'“‘])\s+/u', '$1', $pinyin);
+        $pinyin = preg_replace('/\s+([”’"\'])/u', '$1', $pinyin);
+        $pinyin = preg_replace('/([”’])(\S)/u', '$1 $2', $pinyin);
+        $pinyin = preg_replace('/(["\']){2}/u', '$1 $1', $pinyin);
+        $pinyin = preg_replace_callback(
+            '/(^["\']|[\s"]["\']|[“‘])([a-zA-Z])/u',
+            static function (array $matches): string {
+                return $matches[1].mb_strtoupper($matches[2]);
+            },
+            $pinyin
+        );
         $pinyin = PinyinYear::replaceYears($pinyin);
         $firstChar = mb_strtoupper(mb_substr($pinyin, 0, 1));
         $rest = mb_substr($pinyin, 1);
@@ -64,7 +75,10 @@ class FurthestForwardMatching implements HanziPinyinConversionStrategy
                     }
                     continue;
                 }
-                if ($pos === 1 && $pinyin && ($furthestForward === '儿' || $furthestForward === '兒')) {
+                if ($pos === 1 && $pinyin
+                    && ($furthestForward === '儿'
+                        || $furthestForward
+                           === '兒')) {
                     $pinyin = preg_replace('/([0-5]?)\s*$/u', 'r$1 ', $pinyin, 1);
                     $subject = mb_substr($subject, 1);
                     break;
