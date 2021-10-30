@@ -43,7 +43,7 @@ class FurthestForwardMatching implements HanziPinyinConversionStrategy
         $firstChar = mb_strtoupper(mb_substr($pinyin, 0, 1));
         $rest = mb_substr($pinyin, 1);
 
-        return new PinyinSentence("{$firstChar}{$rest}");
+        return new PinyinSentence("$firstChar$rest");
     }
 
     private static function furthestForwardMatching(string $subject): string
@@ -69,7 +69,7 @@ class FurthestForwardMatching implements HanziPinyinConversionStrategy
                     $subject = mb_substr($subject, 1);
                     break;
                 }
-                $pinyin .= " {$conversionTable[$furthestForward]} ";
+                $pinyin .= " $conversionTable[$furthestForward] ";
                 $subject = mb_substr($subject, $pos);
                 break;
             }
@@ -99,7 +99,6 @@ class FurthestForwardMatching implements HanziPinyinConversionStrategy
             return [];
         }
 
-        /** @noinspection PhpIncludeInspection */
         return require $filePath;
     }
 

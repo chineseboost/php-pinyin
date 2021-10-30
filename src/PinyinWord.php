@@ -70,9 +70,7 @@ class PinyinWord implements Stringable, Normalizing, HtmlAble
         for ($syl = 0; $remaining !== '' && $syl < $this->syllableLimit; $syl++) {
             $nextSyllable = PinyinRegex::extractFirstSyllable($remaining);
             if (!$nextSyllable) {
-                if ($remaining !== '') {
-                    $elements[] = new NonPinyinString($remaining);
-                }
+                $elements[] = new NonPinyinString($remaining);
                 break;
             }
 
@@ -86,6 +84,9 @@ class PinyinWord implements Stringable, Normalizing, HtmlAble
 
             $elements[] = new PinyinSyllable($nextSyllable);
             $remaining = mb_substr($remaining, mb_strlen($nextSyllable));
+            if (preg_match('/^[aeiou]/iu', $remaining)) {
+                $elements[] = new NonPinyinString("'");
+            }
         }
 
         return $elements;
@@ -128,7 +129,7 @@ class PinyinWord implements Stringable, Normalizing, HtmlAble
 
         return trim(
             <<<HTML
-<span class="pinyin word" lang="zh-Latn-CN-pinyin">{$elementsHtml}</span>
+<span class="pinyin word" lang="zh-Latn-CN-pinyin">$elementsHtml</span>
 HTML
         );
     }
