@@ -38,6 +38,10 @@ $ceDictFile = gzopen($ceDictPath, 'r');
 $exportFiles = [];
 $seen = [];
 
+/**
+ * "Forces" alter incoming data from MDBG etc. and override what gets written
+ * to the main data files for a given source word.
+ */
 $forces = [
     '要'  => 'yao4',
     '了'  => 'le5',
@@ -58,6 +62,9 @@ $forces = [
     '轉'  => 'zhuan3',
     '打'  => 'da3',
     '那'  => 'na4',
+    '着'  => 'zhe5',
+    '藏'  => 'cang2',
+    '骰子' => 'shai3zi5',
 ];
 
 while ($line = stream_get_line($ceDictFile, 1024 * 1024, "\n")) {
@@ -114,15 +121,19 @@ while ($line = stream_get_line($ceDictFile, 1024 * 1024, "\n")) {
         fwrite($exportFiles[$lengthKey], '<?php return [');
     }
 
-    fwrite($exportFiles[$lengthKey], "'{$fanti}'=>'{$pinyin}',");
+    fwrite($exportFiles[$lengthKey], "'$fanti'=>'$pinyin',");
 
     if ($jianti !== $fanti) {
-        fwrite($exportFiles[$lengthKey], "'{$jianti}' => '{$pinyin}',");
+        fwrite($exportFiles[$lengthKey], "'$jianti' => '$pinyin',");
     }
 }
 
 printf("Wrote %d data files\n", count($exportFiles));
 
+/**
+ * "Tweaks", pronouns, punctuation etc. get added to main data files in addition
+ * to source words.
+ */
 $basicTweaks = [
     '必须得' => 'bi4xu1 dei3',
     '取得'  => 'qu3de2',
@@ -145,9 +156,26 @@ $pronouns = [
     '誰' => 'shei2',
 ];
 foreach ($pronouns as $pronoun => $pronounPinyin) {
-    $basicTweaks["{$pronoun}得"] = "{$pronounPinyin} dei3";
-    $basicTweaks["{$pronoun}们得"] = "{$pronounPinyin} dei3";
+    $basicTweaks["{$pronoun}得"] = "$pronounPinyin dei3";
+    $basicTweaks["{$pronoun}们得"] = "$pronounPinyin dei3";
 }
+
+$numerals = [
+    '一',
+    '二',
+    '三',
+    '四',
+    '五',
+    '六',
+    '七',
+    '八',
+    '九',
+    '十',
+    '百',
+    '千',
+    '万',
+    '亿',
+];
 
 $punctuation = [
     '。'  => '. ',
@@ -190,9 +218,14 @@ foreach (array_merge($basicTweaks, $punctuation) as $zhongWen => $pinyinConversi
         continue;
     }
     $lengthKey = sprintf('%02d', mb_strlen($zhongWen));
-    fwrite($exportFiles[$lengthKey], "'{$zhongWen}'=>'{$pinyinConversion}',");
+    fwrite($exportFiles[$lengthKey], "'$zhongWen'=>'$pinyinConversion',");
 }
 
+/**
+ * "Regex tweaks" go in a special regex tweaks data file that gets applied
+ * globally on a whole hanzi string first before furthest-forward matching is
+ * applied to the rest.
+ */
 $regexTweaks = [
     sprintf(
         '/(%s[们們]?)([把将])(.{1,20})落/u',
@@ -203,6 +236,10 @@ $regexTweaks = [
     '/([么|麽].)地/u'          => '$1 de5',
     '/([一|两|那|这|這|此].)地/u'  => '$1 di4',
     '/不([\p{Han}]{1,4})地/u' => 'bu4 $1 de5',
+    sprintf(
+        '/(%s)+个/u',
+        implode('|', $numerals)
+    )                       => '$1 ge5',
 ];
 $tweaksFilePath = implode(
     DIRECTORY_SEPARATOR,
@@ -211,7 +248,7 @@ $tweaksFilePath = implode(
 $tweaksFile = fopen($tweaksFilePath, 'wb');
 fwrite($tweaksFile, '<?php return [');
 foreach ($regexTweaks as $regex => $tweak) {
-    fwrite($tweaksFile, "'{$regex}'=>'{$tweak}',");
+    fwrite($tweaksFile, "'$regex'=>'$tweak',");
 }
 
 foreach (array_merge($exportFiles, [$tweaksFile]) as $exportFile) {

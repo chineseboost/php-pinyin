@@ -95,6 +95,9 @@ class FurthestForwardMatchingTest extends TestCase
             ['劲儿', 'Jinr4'],
             ['裙儿', 'Qunr2'],
             ['驴儿', 'Lvr2'],
+            ['只有', 'Zhi3you3'],
+            ['骰子', 'Shai3zi5'],
+            ['色子', 'Shai3zi5'],
             ['那', 'Na4'],
             ['一瓶儿', 'Yi1 pingr2'],
             ['公园儿', 'Gong1yuanr2'],
@@ -118,6 +121,8 @@ class FurthestForwardMatchingTest extends TestCase
             ['事兒', 'Shir4'],
             ['板兒磚', 'Banr3 zhuan1'],
             ['好玩儿', 'Hao3wanr2'],
+            ['母亲安抚着她在哭的婴儿', 'Mu3qin1 an1fu3 zhe5 ta1 zai4 ku1 de5 ying1er2'],
+            ['一个人藏，十个人找。', 'Yi1 ge5 ren2 cang2, shi2 ge5 ren2 zhao3.'],
             ['他这么快地把工作做完', 'Ta1 zhe4me5 kuai4 de5 ba3 gong1zuo4 zuo4 wan2'],
             [
                 '科学家的工作就是对理论加以检验。',
