@@ -95,6 +95,7 @@ class FurthestForwardMatchingTest extends TestCase
             ['劲儿', 'Jinr4'],
             ['裙儿', 'Qunr2'],
             ['驴儿', 'Lvr2'],
+            ['那', 'Na4'],
             ['一瓶儿', 'Yi1 pingr2'],
             ['公园儿', 'Gong1yuanr2'],
             ['小孩儿', 'Xiao3hair2'],
