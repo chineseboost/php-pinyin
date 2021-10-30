@@ -106,6 +106,7 @@ while ($line = stream_get_line($ceDictFile, 1024 * 1024, "\n")) {
     $pinyin = preg_replace('/u:/u', 'v', $pinyin);
     $pinyin = $forces[$jianti] ?? $forces[$fanti] ?? preg_replace('/\s+([^A-Z])/u', '$1', $pinyin);
     $pinyin = preg_replace('/([0-5])\s*r5/u', 'r$1', $pinyin);
+    $pinyin = preg_replace('/([0-5])([aeiou])/ui', "$1\'$2", $pinyin);
 
     if ($hanziLength === 1) {
         $pinyin = mb_strtolower($pinyin);
