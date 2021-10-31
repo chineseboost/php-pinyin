@@ -2,7 +2,7 @@
 
 mb_internal_encoding('UTF-8');
 
-$tmpPath = __DIR__ . '/tmp';
+$tmpPath = __DIR__.'/tmp';
 if (!is_dir($tmpPath)) {
     mkdir($tmpPath);
 }
