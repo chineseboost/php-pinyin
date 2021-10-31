@@ -2,7 +2,12 @@
 
 mb_internal_encoding('UTF-8');
 
-$ceDictPath = '/tmp/cedict_1_0_ts_utf-8_mdbg.txt.gz';
+$tmpPath = __DIR__.'/tmp';
+if (!is_dir($tmpPath)) {
+    mkdir($tmpPath);
+}
+
+$ceDictPath = "$tmpPath/cedict_1_0_ts_utf-8_mdbg.txt.gz";
 if (!is_file($ceDictPath)) {
     copy(
         'https://www.mdbg.net/chinese/export/cedict/cedict_1_0_ts_utf-8_mdbg.txt.gz',
@@ -10,7 +15,7 @@ if (!is_file($ceDictPath)) {
     );
 }
 
-$wordFreqPath = '/tmp/global_wordfreq.release_UTF-8.txt';
+$wordFreqPath = "$tmpPath/global_wordfreq.release_UTF-8.txt";
 if (!is_file($wordFreqPath)) {
     copy(
         'https://s3.amazonaws.com/files.chineseboost.com/BCC_LEX_Zh/global_wordfreq.release_UTF-8.txt',
@@ -239,7 +244,7 @@ $regexTweaks = [
     '/([一|两|那|这|這|此].)地/u'  => '$1 di4',
     '/不([\p{Han}]{1,4})地/u' => 'bu4 $1 de5',
     sprintf(
-        '/(%s)+个/u',
+        '/((?>%s)+)个/u',
         implode('|', $numerals)
     )                       => '$1 ge5',
 ];
