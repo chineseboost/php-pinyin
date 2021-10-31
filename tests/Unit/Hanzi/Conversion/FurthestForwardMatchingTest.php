@@ -124,6 +124,7 @@ class FurthestForwardMatchingTest extends TestCase
             ['西藏', 'Xi1zang4'],
             ['西安', "Xi1'an1"],
             ['天峨', "Tian1'e2"],
+            ['两百五十一个人', 'Liang3 bai3 wu3 shi2 yi1 ge5 ren2'],
             ['彼岸消失了，脚下也不稳。', "Bi3'an4 xiao1shi1 le5, jiao3 xia4 ye3 bu4 wen3."],
             ['母亲安抚着她在哭的婴儿', "Mu3qin1 an1fu3 zhe5 ta1 zai4 ku1 de5 ying1'er2"],
             ['一个人藏，十个人找。', 'Yi1 ge5 ren2 cang2, shi2 ge5 ren2 zhao3.'],
